@@ -207,13 +207,11 @@ typedef enum {
 // Morkpeko
 #define SINGLE_HATCH_2560() \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
-//Untested
-
 
 // Rookidee, Blipbu, Nickit, Wooloo, Rolycoly, Zigzagoon
 #define SINGLE_HATCH_3840() \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4)
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4)
 
 // Grookey, Scorbunny, Sobble, Skwovet, Gossifleur, Chewtle, Yamper, 
 // Applin, Silicobra, Arrokuda, Slizzlipede, Sinistea, Hatenna,
