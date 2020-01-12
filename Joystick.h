@@ -85,6 +85,7 @@ typedef enum {
 #define STICK_CENTER 128
 #define STICK_MAX    255
 
+<<<<<<< HEAD
 // This routine causes the player to move in a clockwise circle
 // The length parameter increases amonut of time each direction is pressed, thereby increasing circle radius
 #define CIRCLE_CW(length) \
@@ -215,33 +216,34 @@ typedef enum {
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
     CIRCLE_CW_12(4)
 
+
 // Grookey, Scorbunny, Sobble, Skwovet, Gossifleur, Chewtle, Yamper, 
 // Applin, Silicobra, Arrokuda, Slizzlipede, Sinistea, Hatenna,
 // Impidimp, Perrserker, Cursola, Farfetch'd, Milcery, Pinchurin,
-// Snom
+// Snom, 
 #define SINGLE_HATCH_5120() \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4)
-    
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4)
+	
 // Toxel, Clobbopus, Mr. Mime, Runerigus, Falinks, Eiscue, Cufant
 #define SINGLE_HATCH_6400() \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4)
-//Untested    
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4)
+//Untested	
 
 // Duraludon
 #define SINGLE_HATCH_7680() \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4)
-//Untested    
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4)
+//Untested	
 
 // Indeedee, Dreepy
 #define SINGLE_HATCH_10240 \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
 //Untested
 
 // Joystick HID report structure. We have an input and an output.
