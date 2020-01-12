@@ -85,6 +85,143 @@ typedef enum {
 #define STICK_CENTER 128
 #define STICK_MAX    255
 
+#define CONTROLLER_SETUP() \
+	{ NOTHING, 250 }, { TRIGGERS, 5 }, { NOTHING, 150 }, { TRIGGERS, 5 }, \
+	{ NOTHING, 150 }, { A, 5 }, { NOTHING, 250 }
+	
+#define GET_EGG_1() \
+	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+	{ NOTHING,  30 }, { B, 5 }, { NOTHING,  10 }, { B, 5 }, \
+	{ NOTHING,  10 }, { B, 5 }, { NOTHING,  10 }, { B, 5 }, \
+	{ NOTHING,  10 }
+	
+#define GET_EGG_2() \
+	{ UPLEFT, 10 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 50 }, \
+	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+	{ A, 5 }, { NOTHING, 100 }, { DOWN, 5 }, { NOTHING, 20 }, \
+	{ A, 5 }, { NOTHING, 20 }, { B, 5 }, { NOTHING, 50 }, \
+	{ B, 5 }, { NOTHING, 40 }, { B, 5 }, { NOTHING, 70 }, \
+	{ B, 5 }, { NOTHING, 50 }
+
+#define GET_EGG_3() \
+	{ UPLEFT, 10 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 50 }, \
+	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+	{ A, 5 }, { NOTHING, 100 }, { DOWN, 5 }, { NOTHING, 10 }, \
+	{ DOWN, 5 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 20 }, \
+	{ B, 5 }, { NOTHING, 50 }, { B, 5 }, { NOTHING, 40 }, \
+	{ B, 5 }, { NOTHING, 70 }, { B, 5 }, { NOTHING, 50}, 
+
+#define CIRCLE_CW(length) \
+	{ RIGHT, length }, { DOWNRIGHT, length }, { DOWN, length }, { DOWNLEFT, length }, \
+	{ LEFT, length }, { UPLEFT, length }, { UP, length }, { UPRIGHT, length }
+ 
+#define CIRCLE_CW_12(length) \
+	CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length),  \
+	CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length),  \
+	CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length)
+
+#define CIRCLE_CW_6(length) \
+	CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length),  \
+	CIRCLE_CW(length), CIRCLE_CW(length)
+
+#define SET_UP_BIKE() \
+	{ DOWN, 15 }, { NOTHING,  25 }, { PLUS,  5 }, { NOTHING,  50 }
+	
+#define SET_UP_ROUTE() \
+	{ RIGHT, 50 }, { UPRIGHT, 40 }, { RIGHT, 220 }, { DOWNRIGHT, 50 }, \
+	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 }, { RIGHT, 50 }, \
+	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 },	{ RIGHT, 50 }
+	
+#define EGG_HATCH_ROUTINE() \
+	{ DOWNLEFT, 80 }, \
+	{ LEFTB, 50 },	{ LEFT, 50 },	{ LEFTB, 50 }, { LEFT, 50 }, \
+	{ LEFTB, 50 },	{ LEFT, 50 },	{ LEFTB, 50 },	{LEFT, 50 }, \
+	{ LEFTB, 50 },	{ LEFT, 50 },  { LEFTB, 50 }, { DOWNRIGHT, 30 }, \
+	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 }, { RIGHT, 50 }, \
+	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 },	{ RIGHT, 50 },	\
+	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 },	{ RIGHT, 50 }
+
+#define ROUTINE_5120() \
+	EGG_HATCH_ROUTINE(), EGG_HATCH_ROUTINE(), EGG_HATCH_ROUTINE(), EGG_HATCH_ROUTINE(), \
+	EGG_HATCH_ROUTINE()
+	
+
+#define UP_TO_DAYCARE() \
+	{ RIGHT, 60 }, { DOWN, 40 }, { RIGHT, 30 }, { UP, 185 }, \
+	{ RIGHT, 15 }, { UP, 95 }, { UPLEFT , 7 }
+	
+#define EGG_GET_ROUTINE() \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	{ NOTHING, 20 }, { MINUS, 5 }, { NOTHING, 20 }, { UP, 50 }, \
+	{ UPRIGHT, 30 }, { DOWNRIGHT, 10 }, { UPRIGHT, 10 }, { UPLEFT, 10 }
+
+#define EGG_HATCH_SLOW() \
+	{ B, 5 }, { NOTHING,  250 }, { B, 5 }, { NOTHING,  250 }, \
+	{ B, 5 }, { NOTHING,  250 }, { B, 5 }, { NOTHING,  250 }, \
+	{ B, 5 }, { NOTHING,  250 }
+
+#define WARP_BACK() \
+	{ X, 5 }, { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, \
+	{ A, 5 }, { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, \
+	{ A, 5 }, { NOTHING,  50 }, { A, 5 }, { NOTHING,  250 }, \
+	{ MINUS, 5 }, { NOTHING,  50 } 
+	
+// Egg hatch stes
+
+// Morkpeko
+#define SINGLE_HATCH_2560() \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
+//Untested
+
+
+// Rookidee, Blipbu, Nickit, Wooloo, Rolycoly, Zigzagoon
+#define SINGLE_HATCH_3840() \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4)
+//Untested
+
+
+// Grookey, Scorbunny, Sobble, Skwovet, Gossifleur, Chewtle, Yamper, 
+// Applin, Silicobra, Arrokuda, Slizzlipede, Sinistea, Hatenna,
+// Impidimp, Perrserker, Cursola, Farfetch'd, Milcery, Pinchurin,
+// Snom, 
+#define SINGLE_HATCH_5120() \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4)
+	
+// Toxel, Clobbopus, Mr. Mime, Runerigus, Falinks, Eiscue, Cufant
+#define SINGLE_HATCH_6400() \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4)
+//Untested	
+
+// Duraludon
+#define SINGLE_HATCH_7680() \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4)
+//Untested	
+
+// Indeedee, Dreepy
+#define SINGLE_HATCH_10240 \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
+//Untested
+
+
+
+
 // Joystick HID report structure. We have an input and an output.
 typedef struct {
 	uint16_t Button; // 16 buttons; see JoystickButtons_t for bit mapping
