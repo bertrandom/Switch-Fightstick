@@ -1,36 +1,82 @@
-## snowball thrower
+# Pokemon Sword/Shield auto hatcher
 
-Automatically throws snowballs in The Legend of Zelda: Breath of the Wild by emulating a controller on a Teensy++ v2.0
+Automatically hatches pokemon in sword and shield with the aim of allowing users to farm shinies overnight. 
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/udo8mv5oarg/0.jpg)](https://www.youtube.com/watch?v=udo8mv5oarg)
+This script is currently in progress - it is functional for 2 hatches at 5,120 base egg steps at a little over 5 minutes, or a little over 2.5 minutes per hatch. That's 20-24 pokemon per hour, or 160-192 pokemon per night. Mileage may vary as this script is still a work in progress. 
 
-A full writeup is [here](https://medium.com/@bertrandom/automating-zelda-3b37127e24c8).
+## Requirements
 
-#### How to use
+### Hardware
+* Teensy++ 2.0 
+  * Other teensy boards can be used but require different procedures than are listed here
+  * Arduino Unos can be adapted for use with these scripts using a DFU programmer. Instructions will not be provided here until I can work this out myself. 
+  * Must also have one of those fatter microUSB cables if you're using a Teensy++ 2.0. 
 
-Walk up to Pondo until the **(A) Talk** option is available and plug in the controller. It will automatically sync with the console, initiate the bowling game with Pondo, throw a perfect strike, and end the bowling game. It will play the bowling game in a loop.
+Note: I do this on a docked switch. I've tested versions of this script for about a dozen hours at a time. 
 
-Note that due to certain weather conditions, Link will sometimes fail to throw a strike, causing the game to enter into a mode where Link has to throw again. Thanks to a [change by exsilium](https://github.com/bertrandom/snowball-thrower/pull/1), the loop will recover from this, given enough time. I've tested this running for over 24 hours.
 
-In case you see issues with controller conflicts while in docked mode, try using a USB-C to USB-A adapter in handheld mode. In dock mode, changes in the HDMI connection will briefly make the Switch not respond to incoming USB commands, skipping parts of the sequence. These changes may include turning off the TV, or switching the HDMI input. (Switching to the internal tuner will be OK, if this doesn't trigger a change in the HDMI input.)
+### Software
+* [Teensy Loader](https://www.pjrc.com/teensy/loader.html)
+* [Atmel Gnu Toolchain](http://fab.cba.mit.edu/classes/863.16/doc/projects/ftsmin/windows_avr.html)
+  * This is necessary if you want to build the code or edit the scripts in any way
+  * I followed this tutorial up to installing avrdude
+* [Git for windows](https://gitforwindows.org/)
+  * Again, only necessary if ou want to build the code or edit the scripts in any way
+  * Can be used to clone this repo as well, but downloading as zip will do
 
-This repository has been tested using a Teensy 2.0++.
+ 
 
-#### Compiling and Flashing onto the Teensy 2.0++
-Go to the Teensy website and download/install the [Teensy Loader application](https://www.pjrc.com/teensy/loader.html). For Linux, follow their instructions for installing the [GCC Compiler and Tools](https://www.pjrc.com/teensy/gcc.html). For Windows, you will need the [latest AVR toolchain](http://www.atmel.com/tools/atmelavrtoolchainforwindows.aspx) from the Atmel site. See [this issue](https://github.com/LightningStalker/Splatmeme-Printer/issues/10) and [this thread](http://gbatemp.net/threads/how-to-use-shinyquagsires-splatoon-2-post-printer.479497/) on GBAtemp for more information. (Note for Mac users - the AVR MacPack is now called AVR CrossPack. If that does not work, you can try installing `avr-gcc` with `brew`.)
+## How to use this
 
-LUFA has been included as a git submodule, so cloning the repo like this:
+### Loading the script
+1. Download the appropriate hex file for your pokemon's egg steps.
+  * Hex files can be found [here]
+  * A list of pokemon egg steps can be found here [https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_base_Egg_cycles]
+1. Plug your Teensy++ 2.0 into your computer
+1. Load the Teensy Loader program
+1. Click the Open Hex File button (a little gray list) and select the hex file
+1. Press the button on the Teensy++ 2.0. You should now see it appear in the Teensy Loader program
+1. Press the program button (green arrow going into the hole. 
 
-```
-git clone --recursive git@github.com:bertrandom/snowball-thrower.git
-```
+### Preparing in game
 
-will put LUFA in the right directory.
+1. Get the oval charm. This is necessary otherwise the timing on the script will be messed up becasue you can't get eggs fast enough. 
+1. Get a pokemon with flame body in your party slot 6. I grabbed carkoal from the mine tracks as they can be easily caught due to low level and some already have the ability.
+1. Make sure that your party is full and there are no eggs. 
+1. Put your pokemon to breed in the daycare (look up the Shiny Charm and Masuda method - both will help your shiny chances)
+1. Run around until the day care lady has an egg but don't grab it just yet. 
+1. Warp to route 5. Make sure you are not on your bike. Make sure that when you open the menu that "Town Map" is where your selection defaults to. Dont move from in front of the camp. The script is pretty sensitive to positioning. If you need to, warp again once you're ready. 
 
-Now you should be ready to rock. Open a terminal window in the `snowball-thrower` directory, type `make`, and hit enter to compile. If all goes well, the printout in the terminal will let you know it finished the build! Follow the directions on flashing `Joystick.hex` onto your Teensy, which can be found page where you downloaded the Teensy Loader application.
+### Getting going
 
-#### Thanks
+1. Disconnect all your controllers from your switch. Attached joycons and procons included. If you are in the game this should not cause any issues and you will not see any pop ups. 
+1. Plug the Teensy into one of your dock ports. 
+1. Once your character walks up and starts talking to the day care lady and gets the first egg, you should be good to go. 
+
+## Improvements from past scripts
+
+* Added C macros
+  * Simplifies the process of calling repetitive actions
+  * Improves readability and editability of scripts
+  * Main scripting work has been shifted off to the header file instead of the c file
+* Added new buttons and button macros - not a large improvement, but these are available. 
+
+## Future work and needed help
+
+* Day care optimization
+  * The average daycare egg hatch time is much less than I have implemented here. This is due to the fact that the current script will break if the daycare does not have an available egg. 
+  * Tight timing can possibly fix this
+    * Case 1: If you press A twice when there is an egg present, a pause in between the egg acceptance message and your ability to click will happen
+    * Case 2: If you press A twice then B twice when there is no egg present, the process will exit without you taking your pokemon out from the day care
+    * With tight timing, you may be able to implement a double B click and a direction change in the time that the pause happens in Case 1. This will allow you to avoid taking pokemon out of the daycare even if the daycare lady has no egg. Using this, you could bring down the amount of turns needed to get the egg on average and pick up more eggs before moving on to the route script
+    * This timing has previously been too tight for me to work through in a timely manner
+    
+
+
+### Thanks
 
 Thanks to Shiny Quagsire for his [Splatoon post printer](https://github.com/shinyquagsire23/Switch-Fightstick) and progmem for his [original discovery](https://github.com/progmem/Switch-Fightstick).
 
-Thanks to [exsilium](https://github.com/bertrandom/snowball-thrower/pull/1) for improving the command structure, optimizing the waiting times, and handling the failure scenarios. It can now run indefinitely!
+Thanks to [bertrandom](https://github.com/bertrandom/snowball-thrower/) he pretty much made the foundation for this script. This is an improved/more modular verison catered to pokemon shiny hunting. 
+
+Thanks as well to all contributors to previous projects. 
