@@ -61,6 +61,7 @@ static const command step[] = {
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
     WARP_BACK(), // Warp back to the camp to reset the script
     */
+
     ///// 5120 base egg steps hatcher /////
     /*
     UP_TO_DAYCARE(), //Go up to the daycare lady
@@ -71,6 +72,21 @@ static const command step[] = {
     WARP_BACK(), // Warp to the route for a reset
     */
 
+    ///// Relese 5 consecutive boxes of pokemon /////
+    /*
+    RELEASE_RESET(), // Reset box position
+    RELEASE_BOX(), // Releases all pokemon in box 1
+    MOVE_NEW_BOX(), // Moves to next box
+    RELEASE_BOX(), // Releases all pokemon in box 2
+    MOVE_NEW_BOX(), // Moves to next box
+    RELEASE_BOX(), // Releases all pokemon in box 3
+    MOVE_NEW_BOX(), // Moves to next box
+    RELEASE_BOX(), // Releases all pokemon in box 4
+    MOVE_NEW_BOX(), // Moves to next box
+    RELEASE_BOX(), // Releases all pokemon in box 5
+    MOVE_NEW_BOX(), // Moves to next box
+    { NOTHING, 100000 } //Makes sure no accidental releases happen
+    */
 };
 
 // Main entry point.

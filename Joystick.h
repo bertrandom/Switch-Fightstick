@@ -171,6 +171,44 @@ typedef enum {
     { B, 5 }, { NOTHING, 50 }, { B, 5 }, { NOTHING, 40 }, \
     { B, 5 }, { NOTHING, 70 }, { B, 5 }, { NOTHING, 50} 
 
+// This releases an entire box of pokemon
+#define RELEASE_BOX() \
+	RELEASE_ROW(), MOVE_NEW_ROW(), RELEASE_ROW(), MOVE_NEW_ROW(), \
+	RELEASE_ROW(), MOVE_NEW_ROW(), RELEASE_ROW(), MOVE_NEW_ROW(), \
+	RELEASE_ROW()
+
+// This is used to change to the correct box when you first plug in the controller
+#define RELEASE_RESET() \
+	{ B,  250 }, { NOTHING,  10 }, { UP,   5 }, { NOTHING,  10 }, \
+	{ RIGHT,   5 }, { NOTHING,  10 }, { DOWN,   5 }, { NOTHING,  10 }
+	
+// This releases an indvidual pokemon
+#define RELEASE_POKEMON() \
+	{ A,  10 }, { NOTHING,  10 }, { UP,  10 }, { NOTHING,  10 }, \
+	{ UP,  10 }, { NOTHING,  10 }, { A,  10 }, { NOTHING,  40 }, \
+	{ UP,  10 }, { NOTHING,  10 }, { A,  10 }, { NOTHING,  40 }, \
+	{ A,  10 }, { NOTHING,  20 }
+
+// This releases a row of pokemon
+#define RELEASE_ROW() \
+	RELEASE_POKEMON(), { RIGHT,  10 }, { NOTHING,  20 }, \
+	RELEASE_POKEMON(), { RIGHT,  10 }, { NOTHING,  20 }, \
+	RELEASE_POKEMON(), { RIGHT,  10 }, { NOTHING,  20 }, \
+	RELEASE_POKEMON(), { RIGHT,  10 }, { NOTHING,  20 }, \
+	RELEASE_POKEMON(), { RIGHT,  10 }, { NOTHING,  20 }, \
+	RELEASE_POKEMON()
+
+// This moves from one row to the next
+#define MOVE_NEW_ROW() \
+	{ RIGHT,  10 }, { NOTHING,  30 }, { RIGHT,  10 }, { NOTHING,  10 }, \
+	{ DOWN,  10 }, { NOTHING,  10 }
+
+// This moves to the next box after releasing is finished
+#define MOVE_NEW_BOX() \
+	{ RIGHT,  10 }, { NOTHING,  30 }, { RIGHT,  10 }, { NOTHING,  10 }, \
+	{ DOWN,  10 }, { NOTHING,  10 }, { DOWN,  10 }, { NOTHING,  10 }, \
+	{ RIGHT,  10 }, { NOTHING,  20 }, { DOWN,  10 }, { NOTHING,  10 }
+
 // This repeatedly performs the EGG_GET_ROUTINE() for 2 5120 base egg step eggs for multi-hatch scripts
 // Time is variable so this macro is currently part of the nonfunctional multi-hatch project
 #define ROUTINE_5120() \
@@ -210,8 +248,8 @@ typedef enum {
 
 // Rookidee, Blipbu, Nickit, Wooloo, Rolycoly, Zigzagoon
 #define SINGLE_HATCH_3840() \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	CIRCLE_CW_12(4)
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    CIRCLE_CW_12(4)
 
 // Grookey, Scorbunny, Sobble, Skwovet, Gossifleur, Chewtle, Yamper, 
 // Applin, Silicobra, Arrokuda, Slizzlipede, Sinistea, Hatenna,
