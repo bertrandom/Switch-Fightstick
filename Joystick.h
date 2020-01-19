@@ -55,20 +55,20 @@
 // Type Defines
 // Enumeration for joystick buttons.
 typedef enum {
-	SWITCH_Y       = 0x01,
-	SWITCH_B       = 0x02,
-	SWITCH_A       = 0x04,
-	SWITCH_X       = 0x08,
-	SWITCH_L       = 0x10,
-	SWITCH_R       = 0x20,
-	SWITCH_ZL      = 0x40,
-	SWITCH_ZR      = 0x80,
-	SWITCH_MINUS   = 0x100,
-	SWITCH_PLUS    = 0x200,
-	SWITCH_LCLICK  = 0x400,
-	SWITCH_RCLICK  = 0x800,
-	SWITCH_HOME    = 0x1000,
-	SWITCH_CAPTURE = 0x2000,
+    SWITCH_Y       = 0x01,
+    SWITCH_B       = 0x02,
+    SWITCH_A       = 0x04,
+    SWITCH_X       = 0x08,
+    SWITCH_L       = 0x10,
+    SWITCH_R       = 0x20,
+    SWITCH_ZL      = 0x40,
+    SWITCH_ZR      = 0x80,
+    SWITCH_MINUS   = 0x100,
+    SWITCH_PLUS    = 0x200,
+    SWITCH_LCLICK  = 0x400,
+    SWITCH_RCLICK  = 0x800,
+    SWITCH_HOME    = 0x1000,
+    SWITCH_CAPTURE = 0x2000,
 } JoystickButtons_t;
 
 #define HAT_TOP          0x00
@@ -85,163 +85,185 @@ typedef enum {
 #define STICK_CENTER 128
 #define STICK_MAX    255
 
-#define CONTROLLER_SETUP() \
-	{ NOTHING, 250 }, { TRIGGERS, 5 }, { NOTHING, 150 }, { TRIGGERS, 5 }, \
-	{ NOTHING, 150 }, { A, 5 }, { NOTHING, 250 }
-	
-#define GET_EGG_1() \
-	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
-	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
-	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
-	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
-	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
-	{ NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
-	{ NOTHING,  30 }, { B, 5 }, { NOTHING,  10 }, { B, 5 }, \
-	{ NOTHING,  10 }, { B, 5 }, { NOTHING,  10 }, { B, 5 }, \
-	{ NOTHING,  10 }
-	
-#define GET_EGG_2() \
-	{ UPLEFT, 10 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 50 }, \
-	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-	{ A, 5 }, { NOTHING, 100 }, { DOWN, 5 }, { NOTHING, 20 }, \
-	{ A, 5 }, { NOTHING, 20 }, { B, 5 }, { NOTHING, 50 }, \
-	{ B, 5 }, { NOTHING, 40 }, { B, 5 }, { NOTHING, 70 }, \
-	{ B, 5 }, { NOTHING, 50 }
-
-#define GET_EGG_3() \
-	{ UPLEFT, 10 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 50 }, \
-	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-	{ A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-	{ A, 5 }, { NOTHING, 100 }, { DOWN, 5 }, { NOTHING, 10 }, \
-	{ DOWN, 5 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 20 }, \
-	{ B, 5 }, { NOTHING, 50 }, { B, 5 }, { NOTHING, 40 }, \
-	{ B, 5 }, { NOTHING, 70 }, { B, 5 }, { NOTHING, 50}, 
-
+// This routine causes the player to move in a clockwise circle
+// The length parameter increases amonut of time each direction is pressed, thereby increasing circle radius
 #define CIRCLE_CW(length) \
-	{ RIGHT, length }, { DOWNRIGHT, length }, { DOWN, length }, { DOWNLEFT, length }, \
-	{ LEFT, length }, { UPLEFT, length }, { UP, length }, { UPRIGHT, length }
- 
-#define CIRCLE_CW_12(length) \
-	CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length),  \
-	CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length),  \
-	CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length)
+    { RIGHT, length }, { DOWNRIGHT, length }, { DOWN, length }, { DOWNLEFT, length }, \
+    { LEFT, length }, { UPLEFT, length }, { UP, length }, { UPRIGHT, length }
 
+// This routine performs 6 clockwise circles
 #define CIRCLE_CW_6(length) \
-	CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length),  \
-	CIRCLE_CW(length), CIRCLE_CW(length)
+    CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length),  \
+    CIRCLE_CW(length), CIRCLE_CW(length)
 
-#define SET_UP_BIKE() \
-	{ DOWN, 15 }, { NOTHING,  25 }, { PLUS,  5 }, { NOTHING,  50 }
-	
-#define SET_UP_ROUTE() \
-	{ RIGHT, 50 }, { UPRIGHT, 40 }, { RIGHT, 220 }, { DOWNRIGHT, 50 }, \
-	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 }, { RIGHT, 50 }, \
-	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 },	{ RIGHT, 50 }
-	
-#define EGG_HATCH_ROUTINE() \
-	{ DOWNLEFT, 80 }, \
-	{ LEFTB, 50 },	{ LEFT, 50 },	{ LEFTB, 50 }, { LEFT, 50 }, \
-	{ LEFTB, 50 },	{ LEFT, 50 },	{ LEFTB, 50 },	{LEFT, 50 }, \
-	{ LEFTB, 50 },	{ LEFT, 50 },  { LEFTB, 50 }, { DOWNRIGHT, 30 }, \
-	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 }, { RIGHT, 50 }, \
-	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 },	{ RIGHT, 50 },	\
-	{ RIGHTB, 50 },	{ RIGHT, 50 },	{ RIGHTB, 50 },	{ RIGHT, 50 }
+// This routine is performs 12 clockwise circles
+#define CIRCLE_CW_12(length) \
+    CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length),  \
+    CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length),  \
+    CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length), CIRCLE_CW(length)
 
-#define ROUTINE_5120() \
-	EGG_HATCH_ROUTINE(), EGG_HATCH_ROUTINE(), EGG_HATCH_ROUTINE(), EGG_HATCH_ROUTINE(), \
-	EGG_HATCH_ROUTINE()
-	
-
-#define UP_TO_DAYCARE() \
-	{ RIGHT, 60 }, { DOWN, 40 }, { RIGHT, 30 }, { UP, 185 }, \
-	{ RIGHT, 15 }, { UP, 95 }, { UPLEFT , 7 }
-	
+// This routine initiates the controller connection
+// This routine must be accounted for in box operations using the RELEASE_RESET() macro
+#define CONTROLLER_SETUP() \
+    { NOTHING, 250 }, { TRIGGERS, 5 }, { NOTHING, 150 }, { TRIGGERS, 5 }, \
+    { NOTHING, 150 }, { A, 5 }, { NOTHING, 250 }
+    
+// This moves the user in bike circles before moving back to the daycare lady
+// This code must be used after the SET_UP_BIKE() macro
+// Time is variable so this macro is currently part of the nonfunctional multi-hatch project
 #define EGG_GET_ROUTINE() \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	{ NOTHING, 20 }, { MINUS, 5 }, { NOTHING, 20 }, { UP, 50 }, \
-	{ UPRIGHT, 30 }, { DOWNRIGHT, 10 }, { UPRIGHT, 10 }, { UPLEFT, 10 }
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    { NOTHING, 20 }, { MINUS, 5 }, { NOTHING, 20 }, { UP, 50 }, \
+    { UPRIGHT, 30 }, { DOWNRIGHT, 10 }, { UPRIGHT, 10 }, { UPLEFT, 10 }
 
+// This hatches 2 5120 base step eggs
+// Time is variable so this macro is currently part of the nonfunctional multi-hatch project
+#define EGG_HATCH_ROUTINE() \
+    { DOWNLEFT, 80 }, \
+    { LEFTB, 50 },    { LEFT, 50 },    { LEFTB, 50 }, { LEFT, 50 }, \
+    { LEFTB, 50 },    { LEFT, 50 },    { LEFTB, 50 },    {LEFT, 50 }, \
+    { LEFTB, 50 },    { LEFT, 50 },  { LEFTB, 50 }, { DOWNRIGHT, 30 }, \
+    { RIGHTB, 50 },    { RIGHT, 50 },    { RIGHTB, 50 }, { RIGHT, 50 }, \
+    { RIGHTB, 50 },    { RIGHT, 50 },    { RIGHTB, 50 },    { RIGHT, 50 },    \
+    { RIGHTB, 50 },    { RIGHT, 50 },    { RIGHTB, 50 },    { RIGHT, 50 }
+
+// This performs an egg hatch slowly and safely for the single hatch scripts
+// This can be optimized further 
 #define EGG_HATCH_SLOW() \
-	{ B, 5 }, { NOTHING,  250 }, { B, 5 }, { NOTHING,  250 }, \
-	{ B, 5 }, { NOTHING,  250 }, { B, 5 }, { NOTHING,  250 }, \
-	{ B, 5 }, { NOTHING,  250 }
+    { B, 5 }, { NOTHING,  250 }, { B, 5 }, { NOTHING,  250 }, \
+    { B, 5 }, { NOTHING,  250 }, { B, 5 }, { NOTHING,  250 }, \
+    { B, 5 }, { NOTHING,  250 }
 
+// This retrieves an egg and puts it in slot 1
+// This code can be optimized in order to implement multi-hatch scripts
+#define GET_EGG_1() \
+    { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+    { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+    { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+    { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+    { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+    { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
+    { NOTHING,  30 }, { B, 5 }, { NOTHING,  10 }, { B, 5 }, \
+    { NOTHING,  10 }, { B, 5 }, { NOTHING,  10 }, { B, 5 }, \
+    { NOTHING,  10 }
+    
+// This retrieves an egg and puts it in slot 2
+// This code can be optimized in order to implement multi-hatch scripts
+#define GET_EGG_2() \
+    { UPLEFT, 10 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 50 }, \
+    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+    { A, 5 }, { NOTHING, 100 }, { DOWN, 5 }, { NOTHING, 20 }, \
+    { A, 5 }, { NOTHING, 20 }, { B, 5 }, { NOTHING, 50 }, \
+    { B, 5 }, { NOTHING, 40 }, { B, 5 }, { NOTHING, 70 }, \
+    { B, 5 }, { NOTHING, 50 }
+
+// This retrieves an egg and puts it in slot 3
+// This code can be optimized in order to implement multi-hatch scripts
+#define GET_EGG_3() \
+    { UPLEFT, 10 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 50 }, \
+    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
+    { A, 5 }, { NOTHING, 100 }, { DOWN, 5 }, { NOTHING, 10 }, \
+    { DOWN, 5 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 20 }, \
+    { B, 5 }, { NOTHING, 50 }, { B, 5 }, { NOTHING, 40 }, \
+    { B, 5 }, { NOTHING, 70 }, { B, 5 }, { NOTHING, 50} 
+
+// This repeatedly performs the EGG_GET_ROUTINE() for 2 5120 base egg step eggs for multi-hatch scripts
+// Time is variable so this macro is currently part of the nonfunctional multi-hatch project
+#define ROUTINE_5120() \
+    EGG_HATCH_ROUTINE(), EGG_HATCH_ROUTINE(), EGG_HATCH_ROUTINE(), EGG_HATCH_ROUTINE(), \
+    EGG_HATCH_ROUTINE()
+
+// This moves the player down from the day care lady and sets up the bike
+#define SET_UP_BIKE() \
+    { DOWN, 15 }, { NOTHING,  25 }, { PLUS,  5 }, { NOTHING,  50 }
+    
+// This sets up the route for the ROUTINE_XXXX() macro 
+// Time is variable so this macro is currently part of the nonfunctional multi-hatch project
+#define SET_UP_ROUTE() \
+    { RIGHT, 50 }, { UPRIGHT, 40 }, { RIGHT, 220 }, { DOWNRIGHT, 50 }, \
+    { RIGHTB, 50 },    { RIGHT, 50 },    { RIGHTB, 50 }, { RIGHT, 50 }, \
+    { RIGHTB, 50 },    { RIGHT, 50 },    { RIGHTB, 50 },    { RIGHT, 50 }
+
+// This moves the player up to the daycare from the camp area
+#define UP_TO_DAYCARE() \
+    { RIGHT, 60 }, { DOWN, 40 }, { RIGHT, 30 }, { UP, 185 }, \
+    { RIGHT, 15 }, { UP, 95 }, { UPLEFT , 7 }
+
+// This warps the player back to the starting location at the camp
 #define WARP_BACK() \
-	{ X, 5 }, { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, \
-	{ A, 5 }, { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, \
-	{ A, 5 }, { NOTHING,  50 }, { A, 5 }, { NOTHING,  250 }, \
-	{ MINUS, 5 }, { NOTHING,  50 } 
-	
-// Egg hatch stes
+    { X, 5 }, { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, \
+    { A, 5 }, { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, \
+    { A, 5 }, { NOTHING,  50 }, { A, 5 }, { NOTHING,  250 }, \
+    { MINUS, 5 }, { NOTHING,  50 } 
 
+// Single Hatch Egg Step macros are below
+// Each macro is acompanies by the pokemon that it works for
+// These macros are currently functional but multi-hatch macros are not
+   
 // Morkpeko
 #define SINGLE_HATCH_2560() \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
 //Untested
 
 
 // Rookidee, Blipbu, Nickit, Wooloo, Rolycoly, Zigzagoon
 #define SINGLE_HATCH_3840() \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	CIRCLE_CW_12(4)
-//Untested
-
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    CIRCLE_CW_12(4)
 
 // Grookey, Scorbunny, Sobble, Skwovet, Gossifleur, Chewtle, Yamper, 
 // Applin, Silicobra, Arrokuda, Slizzlipede, Sinistea, Hatenna,
 // Impidimp, Perrserker, Cursola, Farfetch'd, Milcery, Pinchurin,
-// Snom, 
+// Snom
 #define SINGLE_HATCH_5120() \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4)
-	
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4)
+    
 // Toxel, Clobbopus, Mr. Mime, Runerigus, Falinks, Eiscue, Cufant
 #define SINGLE_HATCH_6400() \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	CIRCLE_CW_12(4)
-//Untested	
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    CIRCLE_CW_12(4)
+//Untested    
 
 // Duraludon
 #define SINGLE_HATCH_7680() \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	CIRCLE_CW_12(4)
-//Untested	
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    CIRCLE_CW_12(4)
+//Untested    
 
 // Indeedee, Dreepy
 #define SINGLE_HATCH_10240 \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-	CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
 //Untested
-
-
-
 
 // Joystick HID report structure. We have an input and an output.
 typedef struct {
-	uint16_t Button; // 16 buttons; see JoystickButtons_t for bit mapping
-	uint8_t  HAT;    // HAT switch; one nibble w/ unused nibble
-	uint8_t  LX;     // Left  Stick X
-	uint8_t  LY;     // Left  Stick Y
-	uint8_t  RX;     // Right Stick X
-	uint8_t  RY;     // Right Stick Y
-	uint8_t  VendorSpec;
+    uint16_t Button; // 16 buttons; see JoystickButtons_t for bit mapping
+    uint8_t  HAT;    // HAT switch; one nibble w/ unused nibble
+    uint8_t  LX;     // Left  Stick X
+    uint8_t  LY;     // Left  Stick Y
+    uint8_t  RX;     // Right Stick X
+    uint8_t  RY;     // Right Stick Y
+    uint8_t  VendorSpec;
 } USB_JoystickReport_Input_t;
 
 // The output is structured as a mirror of the input.
 // This is based on initial observations of the Pokken Controller.
 typedef struct {
-	uint16_t Button; // 16 buttons; see JoystickButtons_t for bit mapping
-	uint8_t  HAT;    // HAT switch; one nibble w/ unused nibble
-	uint8_t  LX;     // Left  Stick X
-	uint8_t  LY;     // Left  Stick Y
-	uint8_t  RX;     // Right Stick X
-	uint8_t  RY;     // Right Stick Y
+    uint16_t Button; // 16 buttons; see JoystickButtons_t for bit mapping
+    uint8_t  HAT;    // HAT switch; one nibble w/ unused nibble
+    uint8_t  LX;     // Left  Stick X
+    uint8_t  LY;     // Left  Stick Y
+    uint8_t  RX;     // Right Stick X
+    uint8_t  RY;     // Right Stick Y
 } USB_JoystickReport_Output_t;
 
 // Function Prototypes
