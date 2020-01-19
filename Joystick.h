@@ -269,7 +269,6 @@ typedef enum {
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
     CIRCLE_CW_12(4)
-//Untested    
 
 // Indeedee, Dreepy
 #define SINGLE_HATCH_10240 \
