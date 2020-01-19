@@ -50,8 +50,7 @@ typedef struct {
 } command; 
 
 static const command step[] = {
-    // Setup controller
-    CONTROLLER_SETUP(),
+    CONTROLLER_SETUP(), // Setup controller
 
     ///// 3840 base egg steps hatcher /////
     /*
@@ -62,7 +61,6 @@ static const command step[] = {
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
     WARP_BACK(), // Warp back to the camp to reset the script
     */
-
     ///// 5120 base egg steps hatcher /////
     /*
     UP_TO_DAYCARE(), //Go up to the daycare lady
@@ -72,6 +70,7 @@ static const command step[] = {
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
     WARP_BACK(), // Warp to the route for a reset
     */
+
 };
 
 // Main entry point.
