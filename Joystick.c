@@ -57,7 +57,7 @@ static const command step[] = {
     UP_TO_DAYCARE(), //Go up to the daycare lady
     GET_EGG_1(), //Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
-    SINGLE_HATCH_2560(), // Hatch a single 3840 base steps egg
+    SINGLE_HATCH_2560(), // Hatch a single 2560 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
     WARP_BACK(), // Warp back to the camp to reset the script
     */
@@ -81,6 +81,16 @@ static const command step[] = {
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
     WARP_BACK(), // Warp to the route for a reset
     */
+
+    ///// 6400 base egg steps hatcher /////
+    /* 
+    UP_TO_DAYCARE(), //Go up to the daycare lady
+    GET_EGG_1(), //Get the first egg (non-optimized)
+    SET_UP_BIKE(), // Step down and get on bike
+    SINGLE_HATCH_6400(), // Hatch a single 6400 base steps egg
+    EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
+    WARP_BACK(), // Warp to the route for a reset
+    */ 
 
     ///// Relese 5 consecutive boxes of pokemon /////
     /*

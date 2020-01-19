@@ -262,9 +262,7 @@ typedef enum {
 // Toxel, Clobbopus, Mr. Mime, Runerigus, Falinks, Eiscue, Cufant
 #define SINGLE_HATCH_6400() \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
-    CIRCLE_CW_12(4)
-//Untested    
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_6(4)
 
 // Duraludon
 #define SINGLE_HATCH_7680() \
