@@ -92,6 +92,16 @@ static const command step[] = {
     WARP_BACK(), // Warp to the route for a reset
     */ 
 
+    ///// 7680 base egg steps hatcher /////
+    /* 
+    UP_TO_DAYCARE(), //Go up to the daycare lady
+    GET_EGG_1(), //Get the first egg (non-optimized)
+    SET_UP_BIKE(), // Step down and get on bike
+    SINGLE_HATCH_7680(), // Hatch a single 7680 base steps egg
+    EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
+    WARP_BACK(), // Warp to the route for a reset
+    */ 
+
     ///// Relese 5 consecutive boxes of pokemon /////
     /*
     RELEASE_RESET(), // Reset box position
