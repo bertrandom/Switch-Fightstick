@@ -271,11 +271,10 @@ typedef enum {
     CIRCLE_CW_12(4)
 
 // Indeedee, Dreepy
-#define SINGLE_HATCH_10240 \
+#define SINGLE_HATCH_10240() \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
-//Untested
 
 // Joystick HID report structure. We have an input and an output.
 typedef struct {
