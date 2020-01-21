@@ -52,10 +52,35 @@ typedef struct {
 static const command step[] = {
     CONTROLLER_SETUP(), // Setup controller
 
+    ///// 10240 base egg steps multi hatcher /////
+    /*
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_1(), // Get the first egg
+    SET_UP_MULTI(), // Step down and get on bike
+    MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_2(), // Get the second egg
+    SET_UP_MULTI(), // Step down and get on bike
+    MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_3(), // Get the third egg
+    SET_UP_MULTI(), // Step down and get on bike
+    MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_4(), // Get the fourth egg
+    SET_UP_MULTI(), // Step down and get on bike
+    MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_5(), // Get the fifth egg
+    SET_UP_MULTI(),
+    MULTI_HATCH_10240(), // Hatches all of the eggs in the party
+    WARP_BACK(), // Warp back to the camp to reset the script
+    */
+
     ///// 2560 base egg steps hatcher /////
     /*
-    UP_TO_DAYCARE(), //Go up to the daycare lady
-    GET_EGG_1(), //Get the first egg (non-optimized)
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_SLOW(), // Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
     SINGLE_HATCH_2560(), // Hatch a single 2560 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
@@ -64,8 +89,8 @@ static const command step[] = {
 
     ///// 3840 base egg steps hatcher /////
     /*
-    UP_TO_DAYCARE(), //Go up to the daycare lady
-    GET_EGG_1(), //Get the first egg (non-optimized)
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_SLOW(), // Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
     SINGLE_HATCH_3840(), // Hatch a single 3840 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
@@ -74,8 +99,8 @@ static const command step[] = {
 
     ///// 5120 base egg steps hatcher /////
     /*
-    UP_TO_DAYCARE(), //Go up to the daycare lady
-    GET_EGG_1(), //Get the first egg (non-optimized)
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_SLOW(), // Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
     SINGLE_HATCH_5120(), // Hatch a single 5120 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
@@ -84,8 +109,8 @@ static const command step[] = {
 
     ///// 6400 base egg steps hatcher /////
     /* 
-    UP_TO_DAYCARE(), //Go up to the daycare lady
-    GET_EGG_1(), //Get the first egg (non-optimized)
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_SLOW(), // Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
     SINGLE_HATCH_6400(), // Hatch a single 6400 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
@@ -94,8 +119,8 @@ static const command step[] = {
 
     ///// 7680 base egg steps hatcher /////
     /* 
-    UP_TO_DAYCARE(), //Go up to the daycare lady
-    GET_EGG_1(), //Get the first egg (non-optimized)
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_SLOW(), // Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
     SINGLE_HATCH_7680(), // Hatch a single 7680 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
@@ -104,8 +129,8 @@ static const command step[] = {
 
     ///// 10240 base egg steps hatcher /////
     /* 
-    UP_TO_DAYCARE(), //Go up to the daycare lady
-    GET_EGG_1(), //Get the first egg (non-optimized)
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_SLOW(), // Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
     SINGLE_HATCH_10240(), // Hatch a single 10240 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
