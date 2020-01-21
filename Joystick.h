@@ -136,7 +136,7 @@ typedef enum {
 
 // This retrieves an egg and puts it in slot 1
 // This code can be optimized in order to implement multi-hatch scripts
-#define GET_EGG_1() \
+#define GET_EGG_SLOW() \
     { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
     { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
     { NOTHING,  50 }, { A, 5 }, { NOTHING,  50 }, { A, 5 }, \
@@ -146,30 +146,77 @@ typedef enum {
     { NOTHING,  30 }, { B, 5 }, { NOTHING,  10 }, { B, 5 }, \
     { NOTHING,  10 }, { B, 5 }, { NOTHING,  10 }, { B, 5 }, \
     { NOTHING,  10 }
-    
+
+// This retrieves an egg and puts it in slot 1 
+// This supports multi egg hatching (will not break if no egg available)
+#define GET_EGG_1() \
+    { A, 10 }, { NOTHING, 35 }, \
+    { A, 10 }, { NOTHING, 35 }, { A, 5 }, { NOTHING, 5 }, \
+    { DOWNB, 10 }, { NOTHING, 8 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 10 }, { NOTHING, 4 }, { NOTHING, 50 }, \
+    { A, 10 }, { NOTHING, 55 }, { A, 10 }, { NOTHING, 105 }, \
+    { A, 10 }, { NOTHING, 95 }, { A, 10 }, { NOTHING, 75 }, \
+    { A, 10 }, { NOTHING, 30 }
+
 // This retrieves an egg and puts it in slot 2
-// This code can be optimized in order to implement multi-hatch scripts
+// This supports multi egg hatching (will not break if no egg available)
 #define GET_EGG_2() \
-    { UPLEFT, 10 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 50 }, \
-    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-    { A, 5 }, { NOTHING, 100 }, { DOWN, 5 }, { NOTHING, 20 }, \
-    { A, 5 }, { NOTHING, 20 }, { B, 5 }, { NOTHING, 50 }, \
-    { B, 5 }, { NOTHING, 40 }, { B, 5 }, { NOTHING, 70 }, \
-    { B, 5 }, { NOTHING, 50 }
+    { UPRIGHT, 40 }, { NOTHING, 20 }, { A, 10 }, { NOTHING, 35 }, \
+    { A, 10 }, { NOTHING, 35 }, { A, 5 }, { NOTHING, 5 }, \
+    { DOWNB, 10 }, { NOTHING, 8 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 10 }, { NOTHING, 4 }, { NOTHING, 50 }, \
+    { A, 10 }, { NOTHING, 55 }, { A, 10 }, { NOTHING, 105 }, \
+    { DOWN, 7 }, { NOTHING, 20 }, \
+    { A, 10 }, { NOTHING, 95 }, { A, 10 }, { NOTHING, 75 }, \
+    { A, 10 }, { NOTHING, 30 }
 
 // This retrieves an egg and puts it in slot 3
-// This code can be optimized in order to implement multi-hatch scripts
+// This supports multi egg hatching (will not break if no egg available)
 #define GET_EGG_3() \
-    { UPLEFT, 10 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 50 }, \
-    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-    { A, 5 }, { NOTHING, 50 }, { A, 5 }, { NOTHING, 50 }, \
-    { A, 5 }, { NOTHING, 100 }, { DOWN, 5 }, { NOTHING, 10 }, \
-    { DOWN, 5 }, { NOTHING, 20 }, { A, 5 }, { NOTHING, 20 }, \
-    { B, 5 }, { NOTHING, 50 }, { B, 5 }, { NOTHING, 40 }, \
-    { B, 5 }, { NOTHING, 70 }, { B, 5 }, { NOTHING, 50} 
+    { UPRIGHT, 40 }, { NOTHING, 20 }, { A, 10 }, { NOTHING, 35 }, \
+    { A, 10 }, { NOTHING, 35 }, { A, 5 }, { NOTHING, 5 }, \
+    { DOWNB, 10 }, { NOTHING, 8 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 10 }, { NOTHING, 4 }, { NOTHING, 50 }, \
+    { A, 10 }, { NOTHING, 55 }, { A, 10 }, { NOTHING, 105 }, \
+    { DOWN, 7 }, { NOTHING, 20 }, { DOWN, 7 }, { NOTHING, 20 }, \
+    { A, 10 }, { NOTHING, 95 }, { A, 10 }, { NOTHING, 75 }, \
+    { A, 10 }, { NOTHING, 30 }
+
+// This retrieves an egg and puts it in slot 4 
+// This supports multi egg hatching (will not break if no egg available)
+#define GET_EGG_4() \
+    { UPRIGHT, 40 }, { NOTHING, 20 }, { A, 10 }, { NOTHING, 35 }, \
+    { A, 10 }, { NOTHING, 35 }, { A, 5 }, { NOTHING, 5 }, \
+    { DOWNB, 10 }, { NOTHING, 8 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 10 }, { NOTHING, 4 }, { NOTHING, 50 }, \
+    { A, 10 }, { NOTHING, 55 }, { A, 10 }, { NOTHING, 105 }, \
+    { DOWN, 7 }, { NOTHING, 20 }, { DOWN, 7 }, { NOTHING, 20 }, \
+    { DOWN, 7 }, { NOTHING, 20 }, \
+    { A, 10 }, { NOTHING, 95 }, { A, 10 }, { NOTHING, 75 }, \
+    { A, 10 }, { NOTHING, 30 }
+
+// This retrieves an egg and puts it in slot 4 
+// This supports multi egg hatching (will not break if no egg available)
+#define GET_EGG_5() \
+    { UPRIGHT, 40 }, { NOTHING, 20 }, { A, 10 }, { NOTHING, 35 }, \
+    { A, 10 }, { NOTHING, 35 }, { A, 5 }, { NOTHING, 5 }, \
+    { DOWNB, 10 }, { NOTHING, 8 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 5 }, { NOTHING, 4 }, { DOWNB, 5 }, { NOTHING, 4 }, \
+    { DOWNB, 10 }, { NOTHING, 4 }, { NOTHING, 50 }, \
+    { A, 10 }, { NOTHING, 55 }, { A, 10 }, { NOTHING, 105 }, \
+    { DOWN, 7 }, { NOTHING, 20 }, { DOWN, 7 }, { NOTHING, 20 }, \
+    { DOWN, 7 }, { NOTHING, 20 }, { DOWN, 7 }, { NOTHING, 20 }, \
+    { A, 10 }, { NOTHING, 95 }, { A, 10 }, { NOTHING, 75 }, \
+    { A, 10 }, { NOTHING, 30 }
 
 // This releases an entire box of pokemon
 #define RELEASE_BOX() \
@@ -217,8 +264,17 @@ typedef enum {
 
 // This moves the player down from the day care lady and sets up the bike
 #define SET_UP_BIKE() \
-    { DOWN, 15 }, { NOTHING,  25 }, { PLUS,  5 }, { NOTHING,  50 }
-    
+    { DOWN, 15 }, { NOTHING,  25 }, { PLUS, 5 }, { NOTHING, 50 }
+
+// This sets the player up to do a multi hatch bike prep 
+#define SET_UP_MULTI() \
+    { DOWN, 15 }, { NOTHING, 10 }, { LEFT, 25 }, { NOTHING, 20 }, \
+    { PLUS, 5 }, { NOTHING, 30 }
+
+// This returns the player from the hatch bike prep route to the right side of the daycare lady 
+#define MULTI_TO_DAYCARE() \
+    { UPRIGHT, 130 }, { NOTHING, 10 }, { PLUS, 5 }, { NOTHING, 30 }
+
 // This sets up the route for the ROUTINE_XXXX() macro 
 // Time is variable so this macro is currently part of the nonfunctional multi-hatch project
 #define SET_UP_ROUTE() \
@@ -229,7 +285,7 @@ typedef enum {
 // This moves the player up to the daycare from the camp area
 #define UP_TO_DAYCARE() \
     { RIGHT, 60 }, { DOWN, 40 }, { RIGHT, 30 }, { UP, 185 }, \
-    { RIGHT, 15 }, { UP, 95 }, { UPLEFT , 7 }
+    { RIGHT, 15 }, { UP, 95 }, { UPLEFT , 7 }, { NOTHING, 20 }
 
 // This warps the player back to the starting location at the camp
 #define WARP_BACK() \
@@ -241,7 +297,19 @@ typedef enum {
 // Single Hatch Egg Step macros are below
 // Each macro is acompanies by the pokemon that it works for
 // These macros are currently functional but multi-hatch macros are not
-   
+
+// This is a routine used in the multi hatch 10240 script
+#define HATCH_ROUTINE_10240() \
+    EGG_HATCH_SLOW(), { UP, 50 }, { UPRIGHT, 120 }, { NOTHING, 10 }, \
+    { PLUS, 5 }, { NOTHING, 30 }, { LEFT, 30 }, { NOTHING, 10 }, \
+    SET_UP_MULTI()
+
+// This is the script that handles the hatching of eggs after all of them hve been gathered in the 10240 script
+#define MULTI_HATCH_10240() \
+    SINGLE_HATCH_2560(), HATCH_ROUTINE_10240(), SINGLE_HATCH_2560(), HATCH_ROUTINE_10240(), \
+    SINGLE_HATCH_2560(), HATCH_ROUTINE_10240(), SINGLE_HATCH_2560(), HATCH_ROUTINE_10240(), \
+    SINGLE_HATCH_2560(), EGG_HATCH_SLOW()
+
 // Morkpeko
 #define SINGLE_HATCH_2560() \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
@@ -275,6 +343,10 @@ typedef enum {
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4), CIRCLE_CW_12(4)
+
+// Bike in circles to get the eggs for multi circles 
+#define MULTI_HATCH_PIECE() \
+    CIRCLE_CW_12(4), CIRCLE_CW_12(4)
 
 // Joystick HID report structure. We have an input and an output.
 typedef struct {
