@@ -305,6 +305,11 @@ typedef enum {
     SET_UP_MULTI()
 
 // This is the script that handles the hatching of eggs after all of them have been gathered in the 6400 script
+#define MULTI_HATCH_5120() \
+    SINGLE_HATCH_2560(), HATCH_ROUTINE_10240(), SINGLE_HATCH_2560(), HATCH_ROUTINE_10240(), \
+    SINGLE_HATCH_2560(), EGG_HATCH_SLOW()
+
+// This is the script that handles the hatching of eggs after all of them have been gathered in the 6400 script
 #define MULTI_HATCH_6400() \
     SINGLE_HATCH_2560(), HATCH_ROUTINE_10240(), SINGLE_HATCH_2560(), HATCH_ROUTINE_10240(), \
     SINGLE_HATCH_2560(), HATCH_ROUTINE_10240(), SINGLE_HATCH_2560(), EGG_HATCH_SLOW()
