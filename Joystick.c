@@ -52,8 +52,35 @@ typedef struct {
 static const command step[] = {
     CONTROLLER_SETUP(), // Setup controller
 
-    ///// 10240 base egg steps multi hatcher /////
+    ///// Basic circles hatcher /////
     /*
+    SINGLE_HATCH_2560(), // Used here to repeatedly hatch eggs
+    EGG_HATCH_SLOW() // Used here to repeatedly hatch eggs
+    */
+
+    ///// 7640 base egg steps multi hatcher /////
+    /*
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_1(), // Get the first egg
+    SET_UP_MULTI(), // Sets up the bike path
+    MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_2(), // Get the second egg
+    SET_UP_MULTI(), // Sets up the bike path
+    MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_3(), // Get the third egg
+    SET_UP_MULTI(), // Sets up the bike path
+    MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_4(), // Get the third egg
+    SET_UP_MULTI(),
+    MULTI_HATCH_7680(), // Hatches all of the eggs in the party
+    WARP_BACK(), 
+    */
+
+    ///// 10240 base egg steps multi hatcher /////
+    /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
     GET_EGG_1(), // Get the first egg
     SET_UP_MULTI(), // Step down and get on bike
@@ -75,39 +102,39 @@ static const command step[] = {
     SET_UP_MULTI(),
     MULTI_HATCH_10240(), // Hatches all of the eggs in the party
     WARP_BACK(), // Warp back to the camp to reset the script
-    */
+    */ 
 
-    ///// 2560 base egg steps hatcher /////
-    /*
+    ///// 2560 base egg steps single hatcher /////
+    /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
     GET_EGG_SLOW(), // Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
     SINGLE_HATCH_2560(), // Hatch a single 2560 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
     WARP_BACK(), // Warp back to the camp to reset the script
-    */
+    */ 
 
-    ///// 3840 base egg steps hatcher /////
-    /*
+    ///// 3840 base egg steps single hatcher /////
+    /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
     GET_EGG_SLOW(), // Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
     SINGLE_HATCH_3840(), // Hatch a single 3840 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
     WARP_BACK(), // Warp back to the camp to reset the script
-    */
+    */ 
 
-    ///// 5120 base egg steps hatcher /////
-    /*
+    ///// 5120 base egg steps single hatcher /////
+    /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
     GET_EGG_SLOW(), // Get the first egg (non-optimized)
     SET_UP_BIKE(), // Step down and get on bike
     SINGLE_HATCH_5120(), // Hatch a single 5120 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
     WARP_BACK(), // Warp to the route for a reset
-    */
+    */ 
 
-    ///// 6400 base egg steps hatcher /////
+    ///// 6400 base egg steps single hatcher /////
     /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
     GET_EGG_SLOW(), // Get the first egg (non-optimized)
@@ -117,7 +144,7 @@ static const command step[] = {
     WARP_BACK(), // Warp to the route for a reset
     */ 
 
-    ///// 7680 base egg steps hatcher /////
+    ///// 7680 base egg steps single hatcher /////
     /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
     GET_EGG_SLOW(), // Get the first egg (non-optimized)
@@ -127,7 +154,7 @@ static const command step[] = {
     WARP_BACK(), // Warp to the route for a reset
     */ 
 
-    ///// 10240 base egg steps hatcher /////
+    ///// 10240 base egg steps single hatcher /////
     /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
     GET_EGG_SLOW(), // Get the first egg (non-optimized)
@@ -138,7 +165,7 @@ static const command step[] = {
     */ 
 
     ///// Relese 5 consecutive boxes of pokemon /////
-    /*
+    /* 
     RELEASE_RESET(), // Reset box position
     RELEASE_BOX(), // Releases all pokemon in box 1
     MOVE_NEW_BOX(), // Moves to next box
@@ -151,7 +178,7 @@ static const command step[] = {
     RELEASE_BOX(), // Releases all pokemon in box 5
     MOVE_NEW_BOX(), // Moves to next box
     { NOTHING, 100000 } //Makes sure no accidental releases happen
-    */
+    */ 
 };
 
 // Main entry point.
@@ -311,32 +338,6 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
         case SYNC_CONTROLLER:
             state = BREATHE;
             break;
-
-        // case SYNC_CONTROLLER:
-        //     if (report_count > 550)
-        //     {
-        //         report_count = 0;
-        //         state = SYNC_POSITION;
-        //     }
-        //     else if (report_count == 250 || report_count == 300 || report_count == 325)
-        //     {
-        //         ReportData->Button |= SWITCH_L | SWITCH_R;
-        //     }
-        //     else if (report_count == 350 || report_count == 375 || report_count == 400)
-        //     {
-        //         ReportData->Button |= SWITCH_A;
-        //     }
-        //     else
-        //     {
-        //         ReportData->Button = 0;
-        //         ReportData->LX = STICK_CENTER;
-        //         ReportData->LY = STICK_CENTER;
-        //         ReportData->RX = STICK_CENTER;
-        //         ReportData->RY = STICK_CENTER;
-        //         ReportData->HAT = HAT_CENTER;
-        //     }
-        //     report_count++;
-        //     break;
 
         case SYNC_POSITION:
             bufindex = 0;
@@ -505,12 +506,6 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
             return;
     }
 
-    // // Inking
-    // if (state != SYNC_CONTROLLER && state != SYNC_POSITION)
-    //     if (pgm_read_byte(&(image_data[(xpos / 8) + (ypos * 40)])) & 1 << (xpos % 8))
-    //         ReportData->Button |= SWITCH_A;
-
-    // Prepare to echo this report
     memcpy(&last_report, ReportData, sizeof(USB_JoystickReport_Input_t));
     echoes = ECHOES;
 
