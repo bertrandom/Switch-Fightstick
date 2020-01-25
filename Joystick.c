@@ -58,6 +58,23 @@ static const command step[] = {
     EGG_HATCH_SLOW() // Used here to repeatedly hatch eggs
     */
 
+    ///// 5120 base egg steps multi hatcher /////
+    /*
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_1(), // Get the first egg
+    SET_UP_MULTI(), // Sets up the bike path
+    MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_2(), // Get the second egg
+    SET_UP_MULTI(), // Sets up the bike path
+    MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_3(), // Get the third egg
+    SET_UP_MULTI(), // Sets up the bike path
+    MULTI_HATCH_5120(), // Hatches all of the eggs in the party
+    WARP_BACK(), 
+    */
+
     ///// 6400 base egg steps multi hatcher /////
     /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
@@ -74,7 +91,7 @@ static const command step[] = {
     MULTI_HATCH_PIECE(), // Bikes in circles waiting for eggs to be ready
     MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
     GET_EGG_4(), // Get the third egg
-    SET_UP_MULTI(), // Sets up the bike path
+    SET_UP_MULTI(),
     MULTI_HATCH_6400(), // Hatches all of the eggs in the party
     WARP_BACK(), 
     */ 
