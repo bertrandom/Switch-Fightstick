@@ -58,6 +58,36 @@ static const command step[] = {
     EGG_HATCH_SLOW() // Used here to repeatedly hatch eggs
     */
 
+    ///// 2560 base egg steps multi hatcher /////
+    /* 
+    UP_TO_DAYCARE(), // Go up to the daycare lady
+    GET_EGG_1(), // Get the first egg
+    SET_UP_MULTI(), // Sets up the bike path
+    SINGLE_HATCH_2560(), // Hatch a single 2560 base steps egg
+    EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_1(), // Get the first egg
+    SET_UP_MULTI(), // Sets up the bike path
+    SINGLE_HATCH_2560(), // Hatch a single 2560 base steps egg
+    EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_1(), // Get the first egg
+    SET_UP_MULTI(), // Sets up the bike path
+    SINGLE_HATCH_2560(), // Hatch a single 2560 base steps egg
+    EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_1(), // Get the first egg
+    SET_UP_MULTI(), // Sets up the bike path
+    SINGLE_HATCH_2560(), // Hatch a single 2560 base steps egg
+    EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
+    GET_EGG_1(), // Get the first egg
+    SET_UP_MULTI(), // Sets up the bike path
+    SINGLE_HATCH_2560(), // Hatch a single 2560 base steps egg
+    EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
+    WARP_BACK(), // Warp back to the camp to reset the script
+    */ 
+
     ///// 3840 base egg steps multi hatcher /////
     /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
@@ -75,10 +105,7 @@ static const command step[] = {
     SET_UP_MULTI(), // Sets up the bike path
     SINGLE_HATCH_3840(), // Hatch a single 3840 base steps egg
     EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
-    GET_EGG_1(), // Get the first egg (non-optimized)
-    SET_UP_MULTI(), // Sets up the bike path
-    SINGLE_HATCH_3840(), // Hatch a single 3840 base steps egg
-    EGG_HATCH_SLOW(), // Slowly and safely hatch an egg
+    MULTI_TO_DAYCARE(), // Returns to the right side of daycare lady
     GET_EGG_1(), // Get the first egg
     SET_UP_MULTI(), // Sets up the bike path
     SINGLE_HATCH_3840(), // Hatch a single 3840 base steps egg
