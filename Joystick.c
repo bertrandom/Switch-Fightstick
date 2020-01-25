@@ -58,6 +58,11 @@ static const command step[] = {
     EGG_HATCH_SLOW() // Used here to repeatedly hatch eggs
     */
 
+    ///// Digger automation ///// 
+    /*
+    { A, 5 }, { NOTHING, 5 },
+    */
+
     ///// 2560 base egg steps multi hatcher /////
     /* 
     UP_TO_DAYCARE(), // Go up to the daycare lady
