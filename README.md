@@ -32,7 +32,8 @@ While I do understand that there are a lack of Teensy++ 2.0 boards available out
 ### Software
 * [Teensy Loader](https://www.pjrc.com/teensy/loader.html)
 * [Atmel Gnu Toolchain](http://fab.cba.mit.edu/classes/863.16/doc/projects/ftsmin/windows_avr.html)
-  * This is necessary if you want to build the code or edit the scripts in any way
+  * This is necessary if you want to build the code or edit the scripts in any way on windows exclusively
+  * There are issues with this and building for Arduino. If you want to build for Arduino follow my Installing Ubuntu + building guide below
   * I followed this tutorial up to installing avrdude
 * [Git for windows](https://gitforwindows.org/)
   * Again, only necessary if you want to build the code or edit the scripts in any way
@@ -40,7 +41,30 @@ While I do understand that there are a lack of Teensy++ 2.0 boards available out
 
 ## How to use this
 
-### Loading the script (no build)
+### Installing Ubuntu on Windows Subsystem for Linux + building
+
+This is only necessary if you want to build the scripts yourself. Windows subsystem for linux isn't the easiest to interface with USB, so I'll be showing you how to make the files here and flash them with your program of choice (teensy loader, atmel flip) on windows. 
+
+1. Open the microsoft store and install Ubuntu 
+1. Let it set up and create a username and password for yourself
+1. Enter this code once you're all set up
+``` 
+sudo apt-get update
+sudo apt-get install -y make gcc-avr-libc
+sudo apt-get install git
+mkdir git
+cd git
+git clone https://github.com/ironandstee1/pkmn-auto-hatcher.git
+cd pkmn-auto-hatcher
+make clean
+make
+```
+1. Open your windows file explorer and navigate to C:/Users/yourusername/AppData/Local/Packages/CanonicalGroupLimited.UbuntuOnWindows.../LocalState/rootfs/home/yourubuntuusername/git/pkmnauto-hatcher
+1. Get your Joystick.hex file and move it to wherever is convenient for you
+1. Create a shortcut or pin this location
+1. Move down to Loading the script (no build)
+
+### Loading the script
 1. Clone the repo to your local machine
 1. Navigate to the directory
 1. Uncomment the code you want or add your own script
@@ -104,4 +128,4 @@ Do you have an idea for a script for this game or another game? Let me know by a
 
 ### Preprocessor->Runtime
 
-Currently this script is very reliant on C macros which are dealt with by the preprocessor. This is just fine when working with the Teensy++ 2.0 - I've comfortably fit ~10 minutes worth of script that could be optimized much further for space just in a single script (multi hatch 10240). However, doing this makes the program pretty incompatible with lower cost boards such as the ATMega16U2 on an Arduino Uno R3. If you are good at C you might be able to deal with this by changing the system architecture and shifting some of the things to runtime. Arrays and functions may take you along way. 
+I'm currently working on a way to get this shifted off to runtime vs preprocessor! That way I can get it loaded onto an Arduino easier. It's pretty difficult, but I think this can be achieved with PROGREM in some fashion or another. If you can help let me know.
