@@ -273,7 +273,8 @@ typedef enum {
 
 // This returns the player from the hatch bike prep route to the right side of the daycare lady 
 #define MULTI_TO_DAYCARE() \
-    { UPRIGHT, 130 }, { NOTHING, 10 }, { PLUS, 5 }, { NOTHING, 30 }
+    { UP, 40 }, { UPRIGHT, 130 }, { NOTHING, 10 }, { PLUS, 5 }, \
+    { NOTHING, 30 }
 
 // This sets up the route for the ROUTINE_XXXX() macro 
 // Time is variable so this macro is currently part of the nonfunctional multi-hatch project
