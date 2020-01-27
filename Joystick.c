@@ -263,7 +263,7 @@ static const command step[] = {
     */ 
 
     ///// Relese 5 consecutive boxes of pokemon /////
-    /* 
+    /*
     RELEASE_RESET(), // Reset box position
     RELEASE_BOX(), // Releases all pokemon in box 1
     MOVE_NEW_BOX(), // Moves to next box
@@ -276,8 +276,40 @@ static const command step[] = {
     RELEASE_BOX(), // Releases all pokemon in box 5
     MOVE_NEW_BOX(), // Moves to next box
     { NOTHING, 100000 } //Makes sure no accidental releases happen
-    */ 
+    */
 };
+
+void stepReport(int stepIndex, USB_JoystickReport_Input_t* const ReportData) {
+switch (step[stepIndex].button) {
+  case UP: ReportData->LY = STICK_MIN; break;
+
+  case LEFT: ReportData->LX = STICK_MIN; break;
+  case DOWN: ReportData->LY = STICK_MAX; break;
+  case RIGHT: ReportData->LX = STICK_MAX; break;
+  case UPLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MIN; break;
+  case UPRIGHT: ReportData->LX = STICK_MAX; ReportData->LY = STICK_MIN; break;
+  case DOWNLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MAX; break;
+  case DOWNRIGHT: ReportData->LX = STICK_MAX; ReportData->LY = STICK_MAX; break;
+  case LEFTB: ReportData->LX = STICK_MIN; ReportData->Button |= SWITCH_B; break;
+  case RIGHTB: ReportData->LX = STICK_MAX; ReportData->Button |= SWITCH_B; break;
+  case DOWNB: ReportData->LY = STICK_MAX; ReportData->Button |= SWITCH_B; break;
+  case A: ReportData->Button |= SWITCH_A; break;
+  case B: ReportData->Button |= SWITCH_B; break;
+  case X: ReportData->Button |= SWITCH_X; break;
+  case Y: ReportData->Button |= SWITCH_Y; break;
+  case L: ReportData->Button |= SWITCH_L; break;
+  case R: ReportData->Button |= SWITCH_R; break;
+  case PLUS: ReportData->Button |= SWITCH_PLUS; break;    
+  case MINUS: ReportData->Button |= SWITCH_MINUS; break;
+  case TRIGGERS: ReportData->Button |= SWITCH_L | SWITCH_R; break;
+                default: ReportData->LX = STICK_CENTER;
+                    ReportData->LY = STICK_CENTER;
+                    ReportData->RX = STICK_CENTER;
+                    ReportData->RY = STICK_CENTER;
+                    ReportData->HAT = HAT_CENTER;
+                    break;
+  }
+}
 
 // Main entry point.
 int main(void) {
@@ -321,12 +353,10 @@ PORTD will toggle when printing is done.
 
 // Fired to indicate that the device is enumerating.
 void EVENT_USB_Device_Connect(void) {
-    // We can indicate that we're enumerating here (via status LEDs, sound, etc.).
 }
 
 // Fired to indicate that the device is no longer connected to a host.
 void EVENT_USB_Device_Disconnect(void) {
-    // We can indicate that our device is not ready (via status LEDs, sound, etc.).
 }
 
 // Fired when the host set the current configuration of the USB device after enumeration.
@@ -342,9 +372,6 @@ void EVENT_USB_Device_ConfigurationChanged(void) {
 
 // Process control requests sent to the device from the USB host.
 void EVENT_USB_Device_ControlRequest(void) {
-    // We can handle two control requests: a GetReport and a SetReport.
-
-    // Not used here, it looks like we don't receive control request from the Switch.
 }
 
 // Process and deliver data from IN and OUT endpoints.
@@ -393,7 +420,11 @@ typedef enum {
     SYNC_CONTROLLER,
     SYNC_POSITION,
     BREATHE,
-    PROCESS,
+    PROCESS_1,
+    PROCESS_2, 
+    PROCESS_3,
+    PROCESS_4,
+    PROCESS_5,
     CLEANUP,
     DONE
 } State_t;
@@ -440,7 +471,6 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
         case SYNC_POSITION:
             bufindex = 0;
 
-
             ReportData->Button = 0;
             ReportData->LX = STICK_CENTER;
             ReportData->LY = STICK_CENTER;
@@ -453,124 +483,21 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
             break;
 
         case BREATHE:
-            state = PROCESS;
+            state = PROCESS_1;
             break;
 
-        case PROCESS:
-
-            switch (step[bufindex].button)
-            {
-
-                case UP:
-                    ReportData->LY = STICK_MIN;                
-                    break;
-
-                case LEFT:
-                    ReportData->LX = STICK_MIN;                
-                    break;
-
-                case DOWN:
-                    ReportData->LY = STICK_MAX;                
-                    break;
-
-                case RIGHT:
-                    ReportData->LX = STICK_MAX;                
-                    break;
-                    
-                case UPLEFT: 
-                    ReportData->LX = STICK_MIN;
-                    ReportData->LY = STICK_MIN;    
-                    break;
-                    
-                case UPRIGHT: 
-                    ReportData->LX = STICK_MAX;
-                    ReportData->LY = STICK_MIN;
-                    break;
-                    
-                   case DOWNLEFT:
-                    ReportData->LX = STICK_MIN;    
-                    ReportData->LY = STICK_MAX; 
-                    break;
-                    
-                case DOWNRIGHT:
-                    ReportData->LX = STICK_MAX;    
-                    ReportData->LY = STICK_MAX;    
-                    break;
-                    
-                case LEFTB: 
-                    ReportData->LX = STICK_MIN;
-                    ReportData->Button |= SWITCH_B; 
-                    break;
-                    
-                case RIGHTB: 
-                    ReportData->LX = STICK_MAX; 
-                    ReportData->Button |= SWITCH_B;  
-                    break;
-                    
-                case DOWNB: 
-                    ReportData->LY = STICK_MAX; 
-                    ReportData->Button |= SWITCH_B;  
-                    break;
-                    
-                case A: 
-                    ReportData->Button |= SWITCH_A; 
-                    break;
-                    
-                case B: 
-                    ReportData->Button |= SWITCH_B; 
-                    break;
-                    
-                case X: 
-                    ReportData->Button |= SWITCH_X; 
-                    break;
-                    
-                case Y: 
-                    ReportData->Button |= SWITCH_Y;
-                    break;
-                    
-                case L: 
-                    ReportData->Button |= SWITCH_L; 
-                    break;
-                    
-                case R:
-                    ReportData->Button |= SWITCH_R;
-                    break;
-                    
-                case PLUS: 
-                    ReportData->Button |= SWITCH_PLUS; 
-                    break;    
-                    
-                case MINUS: 
-                    ReportData->Button |= SWITCH_MINUS;
-                    break;
-
-                case TRIGGERS:
-                    ReportData->Button |= SWITCH_L | SWITCH_R;
-                    break;
-
-                default:
-                    ReportData->LX = STICK_CENTER;
-                    ReportData->LY = STICK_CENTER;
-                    ReportData->RX = STICK_CENTER;
-                    ReportData->RY = STICK_CENTER;
-                    ReportData->HAT = HAT_CENTER;
-                    break;
-            }
+        case PROCESS_1:
+            stepReport(bufindex, ReportData); 
 
             duration_count++;
 
-            if (duration_count > step[bufindex].duration)
-            {
+            if (duration_count > step[bufindex].duration) {
                 bufindex++;
                 duration_count = 0;                
             }
 
 
-            if (bufindex > (int)( sizeof(step) / sizeof(step[0])) - 1)
-            {
-
-                // state = CLEANUP;
-
+            if (bufindex > (int)( sizeof(step) / sizeof(step[0])) - 1) {
                 bufindex = 7;
                 duration_count = 0;
 
@@ -581,13 +508,108 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 ReportData->RX = STICK_CENTER;
                 ReportData->RY = STICK_CENTER;
                 ReportData->HAT = HAT_CENTER;
-
-
-                // state = DONE;
-//                state = BREATHE;
-
             }
 
+            break;
+
+        case PROCESS_2:
+            stepReport(bufindex, ReportData); 
+
+            duration_count++;
+
+            if (duration_count > step[bufindex].duration) {
+                bufindex++;
+                duration_count = 0;                
+            }
+
+
+            if (bufindex > (int)( sizeof(step) / sizeof(step[0])) - 1) {
+                bufindex = 7;
+                duration_count = 0;
+
+                state = BREATHE;
+
+                ReportData->LX = STICK_CENTER;
+                ReportData->LY = STICK_CENTER;
+                ReportData->RX = STICK_CENTER;
+                ReportData->RY = STICK_CENTER;
+                ReportData->HAT = HAT_CENTER;
+            }
+            break;
+
+        case PROCESS_3:
+            stepReport(bufindex, ReportData); 
+
+            duration_count++;
+
+            if (duration_count > step[bufindex].duration) {
+                bufindex++;
+                duration_count = 0;                
+            }
+
+
+            if (bufindex > (int)( sizeof(step) / sizeof(step[0])) - 1) {
+                bufindex = 7;
+                duration_count = 0;
+
+                state = BREATHE;
+
+                ReportData->LX = STICK_CENTER;
+                ReportData->LY = STICK_CENTER;
+                ReportData->RX = STICK_CENTER;
+                ReportData->RY = STICK_CENTER;
+                ReportData->HAT = HAT_CENTER;
+            }
+            break;
+
+        case PROCESS_4:
+            stepReport(bufindex, ReportData); 
+
+            duration_count++;
+
+            if (duration_count > step[bufindex].duration) {
+                bufindex++;
+                duration_count = 0;                
+            }
+
+
+            if (bufindex > (int)( sizeof(step) / sizeof(step[0])) - 1) {
+                bufindex = 7;
+                duration_count = 0;
+
+                state = BREATHE;
+
+                ReportData->LX = STICK_CENTER;
+                ReportData->LY = STICK_CENTER;
+                ReportData->RX = STICK_CENTER;
+                ReportData->RY = STICK_CENTER;
+                ReportData->HAT = HAT_CENTER;
+            }
+            break;
+
+        case PROCESS_5:
+            stepReport(bufindex, ReportData); 
+
+            duration_count++;
+
+            if (duration_count > step[bufindex].duration) {
+                bufindex++;
+                duration_count = 0;                
+            }
+
+
+            if (bufindex > (int)( sizeof(step) / sizeof(step[0])) - 1) {
+                bufindex = 7;
+                duration_count = 0;
+
+                state = BREATHE;
+
+                ReportData->LX = STICK_CENTER;
+                ReportData->LY = STICK_CENTER;
+                ReportData->RX = STICK_CENTER;
+                ReportData->RY = STICK_CENTER;
+                ReportData->HAT = HAT_CENTER;
+            }
             break;
 
         case CLEANUP:
