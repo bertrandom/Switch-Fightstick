@@ -11,10 +11,15 @@ Scripts are currently complete for the following:
 * 10240 base egg steps single egg hatching
 * 5 box release (releases 5 consecutive boxes of pokemon)
 
-Scripts in the development stage:
-* Multi hatching for all other egg steps
-* Surprise trading
-* Link trading
+Scripts that support lower powered boards (arduinos mostly):
+* 5 box release (releases 5 consecutive boxes of pokemon)
+* All scripts will be updated for baseline support for ATMega16U2 and above + all new scripts will have support included
+
+Scripts in the planning phase:
+* Surprise trade whole box
+* Hatch many boxes
+* Watt farming
+
 
 If you would like to just download the hex files for flashing, go [here](https://github.com/ironandstee1/pkmn-hexes). The directions on thie Readme are specifically for people who want to make the files themselves, either for the purpose of understanding or changing the code. The instuctions below require knowledge of how to install and use a gcc. A link/tutorial is provided for windows. 
 
@@ -22,12 +27,13 @@ If you would like to just download the hex files for flashing, go [here](https:/
 ## Requirements
 
 ### Hardware
+One or the other of:
+
 * Teensy++ 2.0 
   * Available on amazon
-  * The code is only currently available for this board
-* Must also have one of those fatter microUSB cables
-  
-While I do understand that there are a lack of Teensy++ 2.0 boards available outside of amazon, this board is particularly necessary for this application. While Arduino boards do have the option to flash hex files, the actual space available on these boards is limited and is usually well below what you need for any code I offer.
+  * Must also have one of those fatter microUSB cables
+* Arduino/pro micro/something with a compatible chip (ATMega16U2, ATMega32U4, etc)
+  * Not all code is supported yet. 5 box release is the only thing supported at the moment. 
 
 ### Software
 * [Teensy Loader](https://www.pjrc.com/teensy/loader.html)
@@ -41,7 +47,7 @@ While I do understand that there are a lack of Teensy++ 2.0 boards available out
 
 ## How to use this
 
-### Installing Ubuntu on Windows Subsystem for Linux + building
+### Installing Ubuntu on Windows Subsystem for Linux + building for ATMega and other boards
 
 This is only necessary if you want to build the scripts yourself. Windows subsystem for linux isn't the easiest to interface with USB, so I'll be showing you how to make the files here and flash them with your program of choice (teensy loader, atmel flip) on windows. 
 
@@ -56,15 +62,18 @@ mkdir git
 cd git
 git clone https://github.com/ironandstee1/pkmn-auto-hatcher.git
 cd pkmn-auto-hatcher
+```
+Edit the mcu in the makefile to be whatever you want it to be that's compatible (atmega16u2, etc). When you try the below steps, if you've typed the wrong one, it will tell you in the console. 
+```
 make clean
 make
 ```
 1. Open your windows file explorer and navigate to C:/Users/yourusername/AppData/Local/Packages/CanonicalGroupLimited.UbuntuOnWindows.../LocalState/rootfs/home/yourubuntuusername/git/pkmnauto-hatcher
 1. Get your Joystick.hex file and move it to wherever is convenient for you
 1. Create a shortcut or pin this location
-1. Move down to Loading the script (no build)
+1. Load it using atmel flip
 
-### Loading the script
+### Making and loading for Teensy++ 2.o
 1. Clone the repo to your local machine
 1. Navigate to the directory
 1. Uncomment the code you want or add your own script
@@ -75,7 +84,7 @@ make
 1. Press the button on the Teensy++ 2.0. You should now see it appear in the Teensy Loader program
 1. Press the program button (green arrow going into the hole) 
 
-### Loading the script (no build)
+### Loading the script (no build) on Teensy++ 2.0
 1. Download the appropriate hex file for your pokemon's egg steps.
   * Hex files can be found [here](https://github.com/ironandstee1/pkmn-hexes)
   * A list of pokemon egg steps can be found [here](https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_base_Egg_cycles)
@@ -100,7 +109,7 @@ make
 1. Plug the Teensy into one of your dock ports. 
 1. Once your character walks up and starts talking to the day care lady and gets the first egg, you should be good to go
 
-More specific instructions for certain scripts like Release and Surprise Trade can be found [here](https://github.com/ironandstee1/pkmn-hexes).
+More specific instructions for certain scripts like Release can be found [here](https://github.com/ironandstee1/pkmn-hexes).
 
 ## Improvements from past scripts
 
@@ -108,6 +117,8 @@ More specific instructions for certain scripts like Release and Surprise Trade c
   * Simplifies the process of calling repetitive actions
   * Improves readability and editability of scripts
   * Main scripting work has been shifted off to the header file instead of the c file
+* Added states
+  * Supports far more intensive and robust scripts while significantly lowering requirements 
 * Added new buttons and button macros - not a large improvement, but these are available
 
 ### Thanks
@@ -120,12 +131,6 @@ Thanks as well to all other contributors to previous projects.
 
 ## How can you help?
 
-I consider this project to be (mostly) done and dusted in terms of capability. The functionality is what I wanted it to be and I am satisfied. However, I do have some ideas to improve it, and here's how you can help.
-
 ### Suggest new scripts for pokemon or other games
 
 Do you have an idea for a script for this game or another game? Let me know by adding comments somewhere here. I am willing to make scripts or even new projects if the call is there. 
-
-### Preprocessor->Runtime
-
-I'm currently working on a way to get this shifted off to runtime vs preprocessor! That way I can get it loaded onto an Arduino easier. It's pretty difficult, but I think this can be achieved with PROGREM in some fashion or another. If you can help let me know.
