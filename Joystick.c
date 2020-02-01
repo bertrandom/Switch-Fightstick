@@ -263,41 +263,37 @@ static const command step1[] = {
     */ 
 
     ///// Release script p1 /////
-    /* 
-    RELEASE_RESET(), // Reset box position
-    */
+     
+    RELEASE_RESET() // Reset box position
+    
 };
 
 static const command step2[] = {
     ///// Default /////
-    { NOTHING, 10 }
-
-    ///// Release script p2 /////
     /*
-    RELEASE_ROW(), MOVE_NEW_ROW()
+    { NOTHING, 10 }
     */
+    ///// Release script p2 /////
+    RELEASE_ROW(), MOVE_NEW_ROW()
 };
 
 static const command step3[] = {
     ///// Default /////
-    { NOTHING, 10 }
-
-    ///// Release script p3 /////
     /*
-    MOVE_NEW_BOX(),
+    { NOTHING, 10 }
     */
-    
+    ///// Release script p3 /////
+    RELEASE_ROW(), 
+    MOVE_NEW_BOX()
 };
 
 static const command step4[] = {
     ///// Default /////
-    { NOTHING, 10 }
-    
-    ///// Release script p4 /////
     /*
-    { B, 10 }, 
-    { NOTHING, 10 },    
-    */
+    { NOTHING, 10 }
+    */ 
+    ///// Release script p4 /////
+    { B, 10 }, { NOTHING, 10 },    
 };
 
 static const command step5[] = {
@@ -594,15 +590,15 @@ int ypos = 0;
 int bufindex = 0;
 int duration_count = 0;
 int portsval = 0;
+int process1iterator = 0;
+int process2iterator = 0;
+int process3iterator = 0;
+int process4iterator = 0;
+int process5iterator = 0;
 
 // Prepare the next report for the host.
 void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 
-    int process1iterator = 0;
-    int process2iterator = 0;
-    int process3iterator = 0;
-    int process4iterator = 0;
-    int process5iterator = 0;
 
     // Prepare an empty report
     memset(ReportData, 0, sizeof(USB_JoystickReport_Input_t));
@@ -659,15 +655,15 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 
             if (bufindex > (int)( sizeof(step1) / sizeof(step1[0])) - 1) {
                 ///// Default script /////
+                /*
                 state = BREATHE;
                 
                 bufindex = 7;
                 duration_count = 0;
-                
+                */ 
 
                 ///// Release script /////
-                /*
-                state = PROCESS_2;
+                
                 bufindex = 0;
                 duration_count = 0;
                 
@@ -676,7 +672,9 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 process3iterator = 0; 
                 process4iterator = 0; 
                 process5iterator = 0; 
-                */
+
+                state = PROCESS_2;
+                
 
                 ReportData->LX = STICK_CENTER;
                 ReportData->LY = STICK_CENTER;
@@ -697,30 +695,28 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 duration_count = 0;                
             }
 
-
             if (bufindex > (int)( sizeof(step2) / sizeof(step2[0])) - 1) {
                 bufindex = 0;
                 duration_count = 0;
 
                 ///// Default script /////
+                /*
                 state = BREATHE;
                 
                 bufindex = 7;
                 duration_count = 0;
-
+                */
                 ///// Release script /////
-                /*
-                if (process2iterator < 5) {
-                    process2iterator ++;
+                
+                if (process2iterator < 3) {
+                    process1iterator = 0; 
+                    process2iterator = process2iterator + 1; 
                     state = PROCESS_2;
                 }
                 else {
                     state = PROCESS_3;
                 }
-                */
 
-                process1iterator = 0; 
-                process2iterator++; 
 
                 ReportData->LX = STICK_CENTER;
                 ReportData->LY = STICK_CENTER;
@@ -746,27 +742,22 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 duration_count = 0;
 
                 ///// Default script /////
+                /*
                 state = BREATHE;
                 
                 bufindex = 7;
                 duration_count = 0;
-
+                */
                 ///// Release script /////
-                /*
                 if (process3iterator < 5) {
                     process3iterator ++;
-                    state = PROCESS_3;
+                    process2iterator = 0; 
+                    state = PROCESS_2;
                 }
                 else {
                     state = PROCESS_4;
                 }
 
-                process1iterator = 0; 
-                process2iterator = 0; 
-                process3iterator++;
-                process4iterator = 0; 
-                process5iterator = 0; 
-                */
 
                 ReportData->LX = STICK_CENTER;
                 ReportData->LY = STICK_CENTER;
@@ -790,18 +781,17 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
             if (bufindex > (int)( sizeof(step4) / sizeof(step4[0])) - 1) {
 
                 ///// default /////
+                /*
                 bufindex = 7;
                 duration_count = 0;
                 state = BREATHE;
-
+                */
                 ///// Release /////
-                /*
                 bufindex = 0;
                 duration_count = 0;
                 state = PROCESS_4;
 
                 process4iterator++;
-                */
 
                 ReportData->LX = STICK_CENTER;
                 ReportData->LY = STICK_CENTER;
