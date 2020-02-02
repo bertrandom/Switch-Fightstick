@@ -41,6 +41,7 @@ typedef enum {
     PLUS,
     MINUS,
     NOTHING,
+    HOME,
     TRIGGERS
 } Buttons_t;
 
@@ -263,8 +264,15 @@ static const command step1[] = {
     */ 
 
     ///// Release script p1 /////
-     
+    /*     
     RELEASE_RESET() // Reset box position
+    */
+
+    ///// Watt farm script p1/////
+     
+    DAY_CHANGE(),
+    WATT_FARM_DAY()
+     
     
 };
 
@@ -273,27 +281,49 @@ static const command step2[] = {
     /*
     { NOTHING, 10 }
     */
+
     ///// Release script p2 /////
+    /*
     RELEASE_ROW(), MOVE_NEW_ROW()
+    */
+
+    ///// Watt farm script p2/////
+
+    MONTH_CHANGE_P1(),
+    MONTH_CHANGE_P2()
+   
+
 };
 
 static const command step3[] = {
     ///// Default /////
-    /*
+    /* 
     { NOTHING, 10 }
-    */
+    */ 
+
     ///// Release script p3 /////
+    /*
     RELEASE_ROW(), 
     MOVE_NEW_BOX()
+    */
+
+    ///// Watt farm script p3/////
+
+    YEAR_CHANGE_P1(),
+    YEAR_CHANGE_P2()
+
 };
 
 static const command step4[] = {
     ///// Default /////
-    /*
+    
     { NOTHING, 10 }
-    */ 
+     
+
     ///// Release script p4 /////
+    /*
     { B, 10 }, { NOTHING, 10 },    
+    */
 };
 
 static const command step5[] = {
@@ -308,6 +338,7 @@ void stepReport(int stepIndex, USB_JoystickReport_Input_t* const ReportData, int
       case LEFT: ReportData->LX = STICK_MIN; break;
       case DOWN: ReportData->LY = STICK_MAX; break;
       case RIGHT: ReportData->LX = STICK_MAX; break;
+      case HOME: ReportData->Button |= SWITCH_HOME; break;
       case UPLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MIN; break;
       case UPRIGHT: ReportData->LX = STICK_MAX; ReportData->LY = STICK_MIN; break;
       case DOWNLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MAX; break;
@@ -339,6 +370,7 @@ void stepReport(int stepIndex, USB_JoystickReport_Input_t* const ReportData, int
       case LEFT: ReportData->LX = STICK_MIN; break;
       case DOWN: ReportData->LY = STICK_MAX; break;
       case RIGHT: ReportData->LX = STICK_MAX; break;
+      case HOME: ReportData->Button |= SWITCH_HOME; break;
       case UPLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MIN; break;
       case UPRIGHT: ReportData->LX = STICK_MAX; ReportData->LY = STICK_MIN; break;
       case DOWNLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MAX; break;
@@ -370,6 +402,7 @@ void stepReport(int stepIndex, USB_JoystickReport_Input_t* const ReportData, int
       case LEFT: ReportData->LX = STICK_MIN; break;
       case DOWN: ReportData->LY = STICK_MAX; break;
       case RIGHT: ReportData->LX = STICK_MAX; break;
+      case HOME: ReportData->Button |= SWITCH_HOME; break;
       case UPLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MIN; break;
       case UPRIGHT: ReportData->LX = STICK_MAX; ReportData->LY = STICK_MIN; break;
       case DOWNLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MAX; break;
@@ -401,6 +434,7 @@ void stepReport(int stepIndex, USB_JoystickReport_Input_t* const ReportData, int
       case LEFT: ReportData->LX = STICK_MIN; break;
       case DOWN: ReportData->LY = STICK_MAX; break;
       case RIGHT: ReportData->LX = STICK_MAX; break;
+      case HOME: ReportData->Button |= SWITCH_HOME; break;
       case UPLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MIN; break;
       case UPRIGHT: ReportData->LX = STICK_MAX; ReportData->LY = STICK_MIN; break;
       case DOWNLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MAX; break;
@@ -432,6 +466,7 @@ void stepReport(int stepIndex, USB_JoystickReport_Input_t* const ReportData, int
       case LEFT: ReportData->LX = STICK_MIN; break;
       case DOWN: ReportData->LY = STICK_MAX; break;
       case RIGHT: ReportData->LX = STICK_MAX; break;
+      case HOME: ReportData->Button |= SWITCH_HOME; break;
       case UPLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MIN; break;
       case UPRIGHT: ReportData->LX = STICK_MAX; ReportData->LY = STICK_MIN; break;
       case DOWNLEFT: ReportData->LX = STICK_MIN; ReportData->LY = STICK_MAX; break;
@@ -663,7 +698,7 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 */ 
 
                 ///// Release script /////
-                
+                /* 
                 bufindex = 0;
                 duration_count = 0;
                 
@@ -674,7 +709,25 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 process5iterator = 0; 
 
                 state = PROCESS_2;
-                
+                */ 
+
+                ///// Watt farm script ////
+
+                bufindex = 7;
+                duration_count = 0;
+
+                if (process1iterator < 23) {
+                    bufindex = 7;
+                    duration_count = 0;
+                    process1iterator++;
+                    state = PROCESS_1;
+                }
+                else {
+                    process1iterator = 0;
+                    duration_count = 0;
+                    bufindex = 0;
+                    state = PROCESS_2;
+                }
 
                 ReportData->LX = STICK_CENTER;
                 ReportData->LY = STICK_CENTER;
@@ -706,14 +759,33 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 bufindex = 7;
                 duration_count = 0;
                 */
+
                 ///// Release script /////
-                
+                /* 
                 if (process2iterator < 3) {
                     process1iterator = 0; 
-                    process2iterator = process2iterator + 1; 
+                    process2iterator++;
                     state = PROCESS_2;
                 }
                 else {
+                    state = PROCESS_3;
+                }
+                */
+
+                ///// Watt farm script p2 /////
+
+
+                if (process2iterator < 10) {
+                    bufindex = 7;
+                    duration_count = 0;
+                    process2iterator++; 
+                    state = PROCESS_1; 
+                } 
+                else {
+                    bufindex = 0;
+                    duration_count = 0;
+                    process1iterator = 0; 
+                    process2iterator = 0; 
                     state = PROCESS_3;
                 }
 
@@ -748,7 +820,9 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 bufindex = 7;
                 duration_count = 0;
                 */
+
                 ///// Release script /////
+                /*
                 if (process3iterator < 5) {
                     process3iterator ++;
                     process2iterator = 0; 
@@ -757,6 +831,16 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 else {
                     state = PROCESS_4;
                 }
+                */
+
+                ///// Watt farm script /////
+
+                bufindex = 7;
+                duration_count = 0;
+
+                process1iterator = 0; 
+                process2iterator = 0; 
+                state = PROCESS_1; 
 
 
                 ReportData->LX = STICK_CENTER;
