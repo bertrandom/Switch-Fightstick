@@ -364,6 +364,86 @@ typedef enum {
 #define MULTI_HATCH_PIECE() \
     CIRCLE_CW_12(4), CIRCLE_CW_12(4)
 
+// Get watts and change the day one forward
+#define DAY_CHANGE() \
+    { HOME, 5 }, { NOTHING, 20 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { RIGHT, 5 }, { NOTHING, 5 }, { RIGHT, 5 }, { NOTHING, 5 }, \
+    { RIGHT, 5 }, { NOTHING, 5 }, { RIGHT, 5 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 20 }, { DOWN, 80 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { A, 5 }, { NOTHING, 15 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 15 }, { RIGHT, 5 }, { NOTHING, 10 }, \
+    { UP, 5 }, { NOTHING, 10 }, { RIGHT, 30 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 10 }, { HOME, 5 }, { NOTHING, 30 }
+
+#define WATT_FARM_DAY() \
+    { A, 5 }, { NOTHING, 30 }, { B, 5 }, { NOTHING, 60 }, \
+    { A, 5 }, { NOTHING, 60 }, { A, 5 }, { NOTHING, 60 }, \
+    { A, 5 }, { NOTHING, 60 }
+
+#define MONTH_CHANGE_P1() \
+    { HOME, 5 }, { NOTHING, 20 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { RIGHT, 5 }, { NOTHING, 5 }, { RIGHT, 5 }, { NOTHING, 5 }, \
+    { RIGHT, 5 }, { NOTHING, 5 }, { RIGHT, 5 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 20 }, { DOWN, 80 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { A, 5 }, { NOTHING, 15 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 15 }, { UP, 5 }, { NOTHING, 10 }, \
+    { RIGHT, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }
+
+#define MONTH_CHANGE_P2() \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 } , { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { RIGHT, 30 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 10 }, { HOME, 5 }, { NOTHING, 30 }, \
+    { A, 5 }, { NOTHING, 30 }
+
+#define YEAR_CHANGE_P1() \
+    { HOME, 5 }, { NOTHING, 20 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { RIGHT, 5 }, { NOTHING, 5 }, { RIGHT, 5 }, { NOTHING, 5 }, \
+    { RIGHT, 5 }, { NOTHING, 5 }, { RIGHT, 5 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 20 }, { DOWN, 80 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { A, 5 }, { NOTHING, 15 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 15 }, { UP, 5 }, { NOTHING, 10 }
+
+
+#define YEAR_CHANGE_P2() \
+    { RIGHT, 5 }, { NOTHING, 5 }, { DOWN, 5 }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { DOWN, 5, }, { NOTHING, 5 }, \
+    { DOWN, 5 }, { NOTHING, 5 }, { RIGHT, 5, }, { NOTHING, 5 }, \
+    { UP, 5 }, { NOTHING, 10 } , { RIGHT, 30 }, { NOTHING, 5 }, \
+    { A, 5 }, { NOTHING, 10 }, { HOME, 5 }, { NOTHING, 30 }, \
+    { A, 5 }, { NOTHING, 30 }
+
+
+
+
 // Joystick HID report structure. We have an input and an output.
 typedef struct {
     uint16_t Button; // 16 buttons; see JoystickButtons_t for bit mapping
