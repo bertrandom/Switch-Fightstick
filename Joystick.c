@@ -269,11 +269,15 @@ static const command step1[] = {
     */
 
     ///// Watt farm script p1/////
-     
+    /*     
     DAY_CHANGE(),
     WATT_FARM_DAY()
-     
-    
+    */     
+
+    ///// 2560 multi hatch p1 /////
+    UP_TO_DAYCARE(),     
+    GET_EGG_1() 
+
 };
 
 static const command step2[] = {
@@ -288,10 +292,12 @@ static const command step2[] = {
     */
 
     ///// Watt farm script p2/////
-
+    /*
     MONTH_CHANGE_P1(),
     MONTH_CHANGE_P2()
-   
+    */ 
+    SET_UP_MULTI()
+    
 
 };
 
@@ -307,23 +313,34 @@ static const command step3[] = {
     MOVE_NEW_BOX()
     */
 
-    ///// Watt farm script p3/////
-
+    ///// Watt farm script p3 /////
+    /*
     YEAR_CHANGE_P1(),
     YEAR_CHANGE_P2()
+    */
+
+    ///// 2560 multi hatch p3 //////
+    CIRCLE_CW(4)
 
 };
 
 static const command step4[] = {
     ///// Default /////
-    
+    /*
     { NOTHING, 10 }
-     
+    */
 
     ///// Release script p4 /////
     /*
     { B, 10 }, { NOTHING, 10 },    
     */
+
+    ///// 2560 multi hatch p3 //////
+    EGG_HATCH_SLOW(),
+    MULTI_TO_DAYCARE(),
+    GET_EGG_1()
+
+    
 };
 
 static const command step5[] = {
@@ -712,7 +729,7 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 */ 
 
                 ///// Watt farm script ////
-
+                /*
                 bufindex = 7;
                 duration_count = 0;
 
@@ -728,6 +745,13 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                     bufindex = 0;
                     state = PROCESS_2;
                 }
+                */
+
+                ///// 2560 multi hatch /////
+                bufindex = 0;
+                duration_count = 0;
+                state = PROCESS_2;
+
 
                 ReportData->LX = STICK_CENTER;
                 ReportData->LY = STICK_CENTER;
@@ -773,8 +797,7 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 */
 
                 ///// Watt farm script p2 /////
-
-
+                /*
                 if (process2iterator < 10) {
                     bufindex = 7;
                     duration_count = 0;
@@ -788,6 +811,13 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                     process2iterator = 0; 
                     state = PROCESS_3;
                 }
+                */
+
+                ///// 2560 multi hatch p2 /////
+                bufindex = 0;
+                duration_count = 0;
+                process3iterator = 0;
+                state = PROCESS_3;
 
 
                 ReportData->LX = STICK_CENTER;
@@ -834,14 +864,26 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 */
 
                 ///// Watt farm script /////
-
+                /*
                 bufindex = 7;
                 duration_count = 0;
 
                 process1iterator = 0; 
                 process2iterator = 0; 
                 state = PROCESS_1; 
+                */
 
+                ///// 2560 multi hatch /////
+                bufindex = 0;
+                duration_count = 0;
+
+                process3iterator++;
+                if(process3iterator < 35) {
+                    state = PROCESS_3;
+                }
+                else {
+                    state = PROCESS_4;
+                }
 
                 ReportData->LX = STICK_CENTER;
                 ReportData->LY = STICK_CENTER;
@@ -871,11 +913,18 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
                 state = BREATHE;
                 */
                 ///// Release /////
+                /*
                 bufindex = 0;
                 duration_count = 0;
                 state = PROCESS_4;
 
                 process4iterator++;
+                */
+
+                bufindex = 0;
+                duration_count = 0;
+
+                state = PROCESS_2;
 
                 ReportData->LX = STICK_CENTER;
                 ReportData->LY = STICK_CENTER;
