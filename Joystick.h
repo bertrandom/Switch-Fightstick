@@ -379,9 +379,17 @@ typedef enum {
     { A, 5 }, { NOTHING, 10 }, { HOME, 5 }, { NOTHING, 30 }
 
 #define WATT_FARM_DAY() \
-    { A, 5 }, { NOTHING, 30 }, { B, 5 }, { NOTHING, 60 }, \
-    { A, 5 }, { NOTHING, 60 }, { A, 5 }, { NOTHING, 60 }, \
-    { A, 5 }, { NOTHING, 60 }
+    { A, 120 }, { NOTHING, 40 }, { B, 5 }, { NOTHING, 10 }, \
+    { B, 5 }, { NOTHING, 10 }, { B, 5 }, { NOTHING, 10 }, \
+    { B, 5 }, { NOTHING, 30 }, { B, 5 }, { NOTHING, 10 }, \
+    { A, 20 }, { NOTHING, 20 }, \
+    { B, 5 }, { NOTHING, 30 }, { B, 5 }, { NOTHING, 10 }, \
+    { B, 5 }, { NOTHING, 30 }, { B, 5 }, { NOTHING, 10 }, \
+    { B, 5 }, { NOTHING, 30 }, { B, 5 }, { NOTHING, 30 }, \
+    { B, 5 }, { NOTHING, 30 }, { B, 5 }, { NOTHING, 30 }, \
+    { B, 5 }, { NOTHING, 30 }, { B, 5 }, { NOTHING, 10 }, \
+    { B, 5 }, { NOTHING, 30 }, { B, 5 }, { NOTHING, 10 }, \
+    { A, 120  }, { NOTHING, 40 }
 
 #define MONTH_CHANGE_P1() \
     { HOME, 5 }, { NOTHING, 20 }, { DOWN, 5 }, { NOTHING, 5 }, \
